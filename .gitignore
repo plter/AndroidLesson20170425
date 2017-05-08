@@ -2,3 +2,6 @@
 .gradle
 *.iml
 build
+CMakeFiles
+cmake_install.cmake
+
