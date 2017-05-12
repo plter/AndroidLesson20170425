@@ -44,12 +44,26 @@ public class Main {
 //        dumpArray(reversedArray);
 
         //Reverse string by charAt
+//        String str = "Hello World";
+//        StringBuilder sb = new StringBuilder();
+//        for (int i = str.length() - 1; i >= 0; i--) {
+//            sb.append(str.charAt(i));
+//        }
+//        System.out.println(sb.toString());
+
+        //Index
+//        String str = "He[llo Wo]rld";
+////        System.out.println(str.indexOf("l"));
+//        int startIndex = str.indexOf("[") + 1;
+//        int endIndex = str.indexOf("]", startIndex);
+//        String content = str.substring(startIndex, endIndex);
+//        System.out.println(content);
+
+        //Replace
         String str = "Hello World";
-        StringBuilder sb = new StringBuilder();
-        for (int i = str.length() - 1; i >= 0; i--) {
-            sb.append(str.charAt(i));
-        }
-        System.out.println(sb.toString());
+        str = str.replace("o", "d");
+//        str = str.replaceFirst("o", "d");
+        System.out.println(str);
     }
 
     static void dumpArray(String[] arr) {
