@@ -14,7 +14,6 @@ public class Main {
 //
 //        System.out.println(str == str1);
 
-
 //        String str = String.format("Hello %d,%f,%s,%c,%x,%o", 100, 3.14f, "World", 'A', 11, 8);
 //
 //        System.out.println(str);
