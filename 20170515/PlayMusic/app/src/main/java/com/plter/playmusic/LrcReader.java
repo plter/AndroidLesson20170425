@@ -27,7 +27,6 @@ public class LrcReader {
 
             String line;
             while ((line = br.readLine()) != null) {
-                System.out.println(line);
 
                 int start = line.indexOf("[") + 1;
                 int end = line.indexOf(":", start);
