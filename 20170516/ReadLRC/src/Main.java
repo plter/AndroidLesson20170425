@@ -22,7 +22,9 @@ public class Main {
                 if (matcher.find()) {
 //                    System.out.println(matcher.group(1));
 
+                    //获取分钟
                     int min = Integer.parseInt(matcher.group(1));
+                    //获取秒钟
                     int sec = Integer.parseInt(matcher.group(2));
                     String content = matcher.group(3);
 
