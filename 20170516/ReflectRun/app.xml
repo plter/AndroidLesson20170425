@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<app>
+    <create ref="hello" class="com.plter.rr.Hello"/>
+    <call name="hello" method="sayHello"/>
+</app>
