@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">AndroidActivity</string>
+    <string name="show_activityb">Show ActivityB</string>
+</resources>
