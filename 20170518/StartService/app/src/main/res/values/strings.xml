@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">StartService</string>
+    <string name="start_service">启动服务</string>
+</resources>
