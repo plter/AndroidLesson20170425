@@ -7,6 +7,7 @@ import android.os.IBinder;
 import android.os.RemoteException;
 
 public class MyService extends Service {
+
     private boolean running = false;
     private int count = 0;
 
