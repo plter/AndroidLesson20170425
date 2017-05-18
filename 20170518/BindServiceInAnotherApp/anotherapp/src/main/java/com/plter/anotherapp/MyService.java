@@ -2,14 +2,15 @@ package com.plter.anotherapp;
 
 import android.app.Service;
 import android.content.Intent;
-import android.os.Binder;
 import android.os.IBinder;
+import android.os.RemoteCallbackList;
 import android.os.RemoteException;
 
 public class MyService extends Service {
 
     private boolean running = false;
     private int count = 0;
+    private RemoteCallbackList<IOnRemoteCountChangeListener> callbackList = new RemoteCallbackList<>();
 
     public MyService() {
     }
@@ -29,6 +30,11 @@ public class MyService extends Service {
         public int getCount() throws RemoteException {
             return MyService.this.getCount();
         }
+
+        @Override
+        public void addOnRemoteCountChangeListener(IOnRemoteCountChangeListener listener) throws RemoteException {
+            callbackList.register(listener);
+        }
     }
 
     @Override
@@ -47,6 +53,20 @@ public class MyService extends Service {
                         sleep(1000);
 
                         count++;
+
+                        callbackList.beginBroadcast();
+
+                        for (int i = 0; i < callbackList.getRegisteredCallbackCount(); i++) {
+                            try {
+                                callbackList.getBroadcastItem(i).onChange(count);
+                            } catch (RemoteException e) {
+                                e.printStackTrace();
+                                break;
+                            }
+                        }
+
+                        callbackList.finishBroadcast();
+
                         System.out.println(count);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
