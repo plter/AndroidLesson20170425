@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">StartActivityInAnotherApp</string>
+    <string name="start_activity_in_another_app">启动另一个应用内部的Activity</string>
+</resources>
