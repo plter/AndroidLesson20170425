@@ -7,8 +7,15 @@ import android.os.IBinder;
 
 public class MyService extends Service {
 
+
+    public interface OnCountChangeListener {
+        void onChange(int count);
+    }
+
     private boolean running = false;
     private int count = 0;
+
+    private OnCountChangeListener onCountChangeListener;
 
     public MyService() {
     }
@@ -28,7 +35,9 @@ public class MyService extends Service {
             return MyService.this.getCount();
         }
 
-
+        public void setOnCountChangeListener(OnCountChangeListener listener) {
+            MyService.this.setOnCountChangeListener(listener);
+        }
     }
 
     @Override
@@ -47,6 +56,11 @@ public class MyService extends Service {
                         sleep(1000);
 
                         count++;
+
+                        if (getOnCountChangeListener() != null) {
+                            getOnCountChangeListener().onChange(count);
+                        }
+
                         System.out.println(count);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
@@ -77,6 +91,14 @@ public class MyService extends Service {
 
     public int getCount() {
         return count;
+    }
+
+    public void setOnCountChangeListener(OnCountChangeListener onCountChangeListener) {
+        this.onCountChangeListener = onCountChangeListener;
+    }
+
+    public OnCountChangeListener getOnCountChangeListener() {
+        return onCountChangeListener;
     }
 
     @Override
