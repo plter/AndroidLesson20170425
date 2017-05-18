@@ -1,12 +1,12 @@
-package com.plter.startservice;
+package com.plter.anotherapp;
 
 import android.app.Service;
 import android.content.Intent;
 import android.os.Binder;
 import android.os.IBinder;
+import android.os.RemoteException;
 
 public class MyService extends Service {
-
     private boolean running = false;
     private int count = 0;
 
@@ -18,17 +18,16 @@ public class MyService extends Service {
         return new MyBinder();
     }
 
-    public class MyBinder extends Binder {
-
-        public void setCount(int count) {
+    public class MyBinder extends IRemoteBinder.Stub {
+        @Override
+        public void setCount(int count) throws RemoteException {
             MyService.this.setCount(count);
         }
 
-        public int getCount() {
+        @Override
+        public int getCount() throws RemoteException {
             return MyService.this.getCount();
         }
-
-
     }
 
     @Override
