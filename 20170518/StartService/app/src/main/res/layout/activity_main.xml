@@ -10,6 +10,18 @@
         android:id="@+id/btnStartService"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/start_service"/>
+        android:text="@string/start_service" />
 
+    <Button
+        android:id="@+id/btnStopService"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/stop_service" />
+
+    <Button
+        android:id="@+id/btnSetServiceCountTo100"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAllCaps="false"
+        android:text="@string/set_service_count_to_100" />
 </LinearLayout>
