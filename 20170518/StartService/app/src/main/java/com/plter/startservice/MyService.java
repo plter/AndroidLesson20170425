@@ -2,6 +2,7 @@ package com.plter.startservice;
 
 import android.app.Service;
 import android.content.Intent;
+import android.os.Binder;
 import android.os.IBinder;
 import android.support.annotation.IntDef;
 
@@ -15,8 +16,20 @@ public class MyService extends Service {
 
     @Override
     public IBinder onBind(Intent intent) {
-        // TODO: Return the communication channel to the service.
-        throw new UnsupportedOperationException("Not yet implemented");
+        return new MyBinder();
+    }
+
+    public class MyBinder extends Binder {
+
+        public void setCount(int count) {
+            MyService.this.setCount(count);
+        }
+
+        public int getCount() {
+            return MyService.this.getCount();
+        }
+
+
     }
 
     @Override
@@ -57,6 +70,14 @@ public class MyService extends Service {
         }
 
         return super.onStartCommand(intent, flags, startId);
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
+
+    public int getCount() {
+        return count;
     }
 
     @Override

@@ -22,6 +22,30 @@
         android:id="@+id/btnSetServiceCountTo100"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAllCaps="false"
-        android:text="@string/set_service_count_to_100" />
+        android:text="@string/set_service_count_to_100"
+        android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/btnBindService"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/bind_service" />
+
+    <Button
+        android:id="@+id/btnUnbindService"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/unbind_service" />
+
+    <Button
+        android:id="@+id/btnSetCountTo100ViaBinder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/set_count_to_100_via_binder" />
+
+    <Button
+        android:id="@+id/btnGetCountFromServiceViaBinder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/get_count_from_service_via_binder" />
 </LinearLayout>

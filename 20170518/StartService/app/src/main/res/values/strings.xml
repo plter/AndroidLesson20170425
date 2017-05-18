@@ -3,4 +3,8 @@
     <string name="start_service">启动服务</string>
     <string name="stop_service">停止服务</string>
     <string name="set_service_count_to_100">将count设置为100</string>
+    <string name="bind_service">绑定服务</string>
+    <string name="unbind_service">解除绑定服务</string>
+    <string name="set_count_to_100_via_binder">通过绑定器将count设置为100</string>
+    <string name="get_count_from_service_via_binder">通过绑定器获取服务内部的count</string>
 </resources>
