@@ -7,6 +7,12 @@
     android:orientation="vertical"
     tools:context="com.plter.bindserviceinanotherapp.MainActivity">
 
+    <TextView
+        android:id="@+id/outputText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Count 0"/>
+
     <Button
         android:id="@+id/btnBindRemoteService"
         android:layout_width="match_parent"
