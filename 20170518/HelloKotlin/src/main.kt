@@ -7,10 +7,7 @@ fun sayHello() {
     println("Hello World");
 }
 
-fun main(args: Array<String>) {
-    val h = Hello()
-    h.sayHello()
 
-    val hi = Hi();
-    hi.sayHi();
+fun main(args: Array<String>) {
+    sayHello();
 }

@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">AIDLCallback</string>
+    <string name="bind_remote_service">绑定远程服务</string>
+    <string name="unbind_remote_service">解除绑定远程服务</string>
+    <string name="set_count_to_100">将count设置为100</string>
+</resources>
