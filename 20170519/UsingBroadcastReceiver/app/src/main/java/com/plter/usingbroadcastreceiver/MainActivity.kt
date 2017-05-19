@@ -18,11 +18,11 @@ open class MainActivity : AppCompatActivity() {
             //            sendBroadcast(Intent(this, MyReceiver::class.java))
 //            sendBroadcast(Intent("com.plter.usingbroadcastreceiver.intent.action.MyReceiver"))
 
-            sendOrderedBroadcast(Intent("com.plter.usingbroadcastreceiver.intent.action.MyReceiver"), null)
+            sendOrderedBroadcast(Intent(MyReceiver.INTENT_ACTION), null)
         }
 
         findViewById(R.id.btnRegisterBroadcastReceiver).setOnClickListener {
-            val filter = IntentFilter("com.plter.usingbroadcastreceiver.intent.action.MyReceiver")
+            val filter = IntentFilter(MyReceiver.INTENT_ACTION)
             filter.priority = 10
             registerReceiver(receiver1, filter)
         }
@@ -32,7 +32,7 @@ open class MainActivity : AppCompatActivity() {
         }
 
         findViewById(R.id.btnRegisterBroadcastReceiver2).setOnClickListener {
-            val filter = IntentFilter("com.plter.usingbroadcastreceiver.intent.action.MyReceiver")
+            val filter = IntentFilter(MyReceiver.INTENT_ACTION)
             filter.priority = 11
             registerReceiver(receiver2, filter)
         }
