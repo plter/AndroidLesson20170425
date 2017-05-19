@@ -8,23 +8,38 @@
     tools:context="com.plter.aidlcallback.MainActivity">
 
     <TextView
+        android:id="@+id/outputText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Hello World!" />
+
     <Button
         android:id="@+id/btnBindRemoteService"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/bind_remote_service"/>
+        android:text="@string/bind_remote_service" />
+
     <Button
         android:id="@+id/btnUnbindRemoteService"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/unbind_remote_service"/>
+        android:text="@string/unbind_remote_service" />
 
     <Button
         android:id="@+id/btnSetCountTo100"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/set_count_to_100"/>
+        android:text="@string/set_count_to_100" />
+
+    <Button
+        android:id="@+id/btnRegisterRemoteListener"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/register_remote_listener" />
+
+    <Button
+        android:id="@+id/btnUnregisterRemoteListener"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/unregister_remote_listener" />
 </LinearLayout>
