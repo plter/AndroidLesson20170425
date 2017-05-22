@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -24,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
     private RequestQueue requestQueue;
     private FloatingActionButton fab;
+    private TextView outputText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
+        outputText = (TextView) findViewById(R.id.outputText);
         requestQueue = Volley.newRequestQueue(this);
 
 
@@ -57,7 +59,8 @@ public class MainActivity extends AppCompatActivity {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        System.out.println(new User(response));
+                        User u = new User(response);
+                        outputText.setText(String.format("User[name=%s,age=%d,gender=%s]", u.getName(), u.getAge(), u.getGender()));
                     }
                 },
                 new Response.ErrorListener() {
