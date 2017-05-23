@@ -8,7 +8,9 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by plter on 5/23/17.
@@ -17,7 +19,7 @@ import java.util.List;
 public class MyAdapter extends BaseAdapter {
 
     private Context context;
-    private List<String> items = new ArrayList<>();
+    private List<User> items = new ArrayList<>();
 
     public MyAdapter(Context context) {
         this.context = context;
@@ -29,7 +31,7 @@ public class MyAdapter extends BaseAdapter {
     }
 
     @Override
-    public String getItem(int position) {
+    public User getItem(int position) {
         return items.get(position);
     }
 
@@ -42,19 +44,29 @@ public class MyAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
 
         if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(android.R.layout.simple_list_item_1, null);
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.user_list_item, null);
+            Map<String, TextView> holder = new HashMap<>();
+            holder.put("tvName", (TextView) convertView.findViewById(R.id.tvName));
+            holder.put("tvDesc", (TextView) convertView.findViewById(R.id.tvDesc));
+            convertView.setTag(holder);
         }
-        TextView textView = (TextView) convertView;
 
-        textView.setText(getItem(position));
-        return textView;
+        Map<String, TextView> holder = (Map<String, TextView>) convertView.getTag();
+        TextView tvName = holder.get("tvName");
+        TextView tvDesc = holder.get("tvDesc");
+
+        User u = getItem(position);
+        tvName.setText(u.getName());
+        tvDesc.setText("年龄:" + u.getAge() + ",性别" + u.getGender());
+
+        return convertView;
     }
 
     public Context getContext() {
         return context;
     }
 
-    public void add(String item) {
+    public void add(User item) {
         items.add(item);
         notifyDataSetChanged();
     }

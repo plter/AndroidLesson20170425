@@ -2,6 +2,7 @@ package top.yunp.usinglistview;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -28,6 +29,29 @@ public class MainActivity extends AppCompatActivity {
         adapter = new MyAdapter(this);
         lv.setAdapter(adapter);
 
+        adapter.add(new User("张三", 10, "男"));
+        adapter.add(new User("张三", 10, "男"));
+        adapter.add(new User("张三", 10, "男"));
+        adapter.add(new User("张三", 10, "男"));
+        adapter.add(new User("张三", 10, "男"));
+        adapter.add(new User("张三", 10, "男"));
+        adapter.add(new User("张三", 10, "男"));
+        adapter.add(new User("张三", 10, "男"));
+        adapter.add(new User("张三", 10, "男"));
+        adapter.add(new User("张三", 10, "男"));
+        adapter.add(new User("张三", 10, "男"));
+        adapter.add(new User("张三", 10, "男"));
+        adapter.add(new User("张三", 10, "男"));
+        adapter.add(new User("张三", 10, "男"));
+        adapter.add(new User("张三", 10, "男"));
+        adapter.add(new User("张三", 10, "男"));
+        adapter.add(new User("张三", 10, "男"));
+        adapter.add(new User("张三", 10, "男"));
+        adapter.add(new User("张三", 10, "男"));
+        adapter.add(new User("张三", 10, "男"));
+        adapter.add(new User("张三", 10, "男"));
+
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
 
@@ -35,8 +59,10 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-                adapter.add("Item " + count);
-                count++;
+//                adapter.add("Item " + count);
+//                count++;
+
+                Snackbar.make(view, "Not implemented yet!", Snackbar.LENGTH_SHORT).show();
             }
         });
     }
