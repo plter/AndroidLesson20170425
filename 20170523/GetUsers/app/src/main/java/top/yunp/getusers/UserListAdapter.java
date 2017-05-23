@@ -26,6 +26,11 @@ public class UserListAdapter extends BaseAdapter {
         this.context = context;
     }
 
+    public void add(User user) {
+        users.add(user);
+        notifyDataSetChanged();
+    }
+
     @Override
     public int getCount() {
         return users.size();
@@ -53,7 +58,7 @@ public class UserListAdapter extends BaseAdapter {
 
         holder.getTvUserName().setText(String.format("名字：%s", user.getName()));
         holder.getTvDecription().setText(String.format("年龄：%d,性别：%s", user.getAge(), user.getGender()));
-        return null;
+        return convertView;
     }
 
     public Context getContext() {
