@@ -43,21 +43,24 @@ public class MyAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
+        MyAdapterViewHolder holder;
+
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.user_list_item, null);
-            Map<String, TextView> holder = new HashMap<>();
-            holder.put("tvName", (TextView) convertView.findViewById(R.id.tvName));
-            holder.put("tvDesc", (TextView) convertView.findViewById(R.id.tvDesc));
+            holder = new MyAdapterViewHolder(
+                    (TextView) convertView.findViewById(R.id.tvName),
+                    (TextView) convertView.findViewById(R.id.tvDesc)
+            );
+
             convertView.setTag(holder);
+        } else {
+            holder = (MyAdapterViewHolder) convertView.getTag();
         }
 
-        Map<String, TextView> holder = (Map<String, TextView>) convertView.getTag();
-        TextView tvName = holder.get("tvName");
-        TextView tvDesc = holder.get("tvDesc");
 
         User u = getItem(position);
-        tvName.setText(u.getName());
-        tvDesc.setText("年龄:" + u.getAge() + ",性别" + u.getGender());
+        holder.getTvName().setText(u.getName());
+        holder.getTvDesc().setText("年龄:" + u.getAge() + ",性别" + u.getGender());
 
         return convertView;
     }
