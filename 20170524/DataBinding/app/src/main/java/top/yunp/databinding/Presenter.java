@@ -21,15 +21,16 @@ public class Presenter {
         this.context = context;
 
         binding.setUser(new User("XiaoHua"));
+        binding.setPresenter(this);
 
 //        binding.tvOut.setText("Hello Android");
 
-        binding.btnClickMe.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getContext(), "Button clicked", Toast.LENGTH_SHORT).show();
-            }
-        });
+//        binding.btnClickMe.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Toast.makeText(getContext(), "Button clicked", Toast.LENGTH_SHORT).show();
+//            }
+//        });
     }
 
     public ActivityMainBinding getBinding() {
@@ -38,5 +39,9 @@ public class Presenter {
 
     public Context getContext() {
         return context;
+    }
+
+    public void btnClickMeClickedHandler(View v) {
+        Toast.makeText(context, "Button clicked", Toast.LENGTH_SHORT).show();
     }
 }

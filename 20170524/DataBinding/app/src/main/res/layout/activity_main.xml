@@ -10,6 +10,10 @@
         <variable
             name="user"
             type="top.yunp.databinding.User" />
+
+        <variable
+            name="presenter"
+            type="top.yunp.databinding.Presenter" />
     </data>
 
     <LinearLayout
@@ -28,6 +32,7 @@
             android:id="@+id/btnClickMe"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="@{presenter::btnClickMeClickedHandler}"
             android:text="Click me" />
     </LinearLayout>
 </layout>
