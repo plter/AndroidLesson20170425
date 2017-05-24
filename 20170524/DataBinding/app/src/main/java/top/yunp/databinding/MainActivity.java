@@ -8,14 +8,13 @@ import top.yunp.databinding.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
 
+
+    private Presenter presenter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ActivityMainBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
-
-//        binding.tvOut.setText("Hello Android DataBinding");
-
-        User u = new User("XiaoHua");
-        binding.setUser(u);
+        presenter = new Presenter(binding, this);
     }
 }
