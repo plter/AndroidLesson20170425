@@ -14,7 +14,6 @@ public class MainActivity extends AppCompatActivity {
 
         final ActivityMainBinding dataBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
 
-
         final CountWrapper countWrapper = new CountWrapper();
         dataBinding.setCountWrapper(countWrapper);
 

@@ -1,5 +1,7 @@
 package top.yunp.autocount;
 
+import android.view.View;
+
 /**
  * Created by plter on 5/23/17.
  */
@@ -17,6 +19,10 @@ public class CountWrapper {
     }
 
     public String getCountString() {
-        return this.count + "";
+        return "Current count " + this.count;
+    }
+
+    public void clickedHandler() {
+        System.out.println("Clicked");
     }
 }

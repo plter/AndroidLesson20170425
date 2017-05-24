@@ -2,7 +2,6 @@ package com.plter.selectname;
 
 import javax.swing.*;
 import java.awt.*;
-
 /**
  * Created by plter on 5/16/17.
  */
