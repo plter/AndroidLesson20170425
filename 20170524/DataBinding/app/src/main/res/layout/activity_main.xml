@@ -28,11 +28,18 @@
             android:layout_height="wrap_content"
             android:text="@{user.name}" />
 
+        <!--<Button-->
+        <!--android:id="@+id/btnClickMe"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:onClick="@{presenter::btnClickMeClickedHandler}"-->
+        <!--android:text="Click me" />-->
+
         <Button
             android:id="@+id/btnClickMe"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="@{presenter::btnClickMeClickedHandler}"
+            android:onClick="@{()->presenter.btnClicked(user.name)}"
             android:text="Click me" />
     </LinearLayout>
 </layout>

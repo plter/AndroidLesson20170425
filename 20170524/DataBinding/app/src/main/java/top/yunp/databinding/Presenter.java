@@ -44,4 +44,8 @@ public class Presenter {
     public void btnClickMeClickedHandler(View v) {
         Toast.makeText(context, "Button clicked", Toast.LENGTH_SHORT).show();
     }
+
+    public void btnClicked(String words) {
+        Toast.makeText(context, words, Toast.LENGTH_SHORT).show();
+    }
 }
