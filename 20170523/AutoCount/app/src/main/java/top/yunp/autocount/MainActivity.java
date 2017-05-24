@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
                     try {
                         sleep(1000);
                         countWrapper.setCount(countWrapper.getCount() + 1);
-                        dataBinding.setCountWrapper(countWrapper);
+//                        dataBinding.setCountWrapper(countWrapper);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
