@@ -10,7 +10,7 @@ public class Presenter {
 
     private ActivityMainBinding binding;
 
-    public Presenter(final ActivityMainBinding binding) {
+    public Presenter(ActivityMainBinding binding) {
         this.binding = binding;
 
         final Count c = new Count();
