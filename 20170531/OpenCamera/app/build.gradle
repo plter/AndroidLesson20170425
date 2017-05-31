@@ -4,7 +4,7 @@ android {
     compileSdkVersion 25
     buildToolsVersion "25.0.3"
     defaultConfig {
-        applicationId "top.yunp.startactivitywithpermission"
+        applicationId "top.yunp.opencamera"
         minSdkVersion 23
         targetSdkVersion 25
         versionCode 1
@@ -16,9 +16,6 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
-    }
-    dataBinding {
-        enabled = true
     }
 }
 
