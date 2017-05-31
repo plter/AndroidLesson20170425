@@ -1,6 +1,7 @@
 package com.plter.layouts;
 
 import android.os.Bundle
+import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.Button
@@ -17,7 +18,7 @@ open class MainActivity : AppCompatActivity(), View.OnClickListener {
 //        val view = LayoutInflater.from(this).inflate(R.layout.activity_main, null)
 //        setContentView(view)
 //        setContentView(R.layout.activity_main)
-
+        
         buildUI()
 
     }
