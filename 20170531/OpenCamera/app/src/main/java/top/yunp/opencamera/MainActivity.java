@@ -8,7 +8,6 @@ import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraDevice;
 import android.hardware.camera2.CameraManager;
 import android.os.Bundle;
-import android.support.annotation.IntDef;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -16,6 +15,7 @@ import android.support.v7.app.AppCompatActivity;
 public class MainActivity extends AppCompatActivity {
 
 
+    private static final int REQUEST_TO_OPEN_CAMERA = 1;
     private CameraManager cameraManager;
 
     @Override
@@ -27,12 +27,12 @@ public class MainActivity extends AppCompatActivity {
 //            System.out.println(checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED);
 //        }
 
+        cameraManager = (CameraManager) getSystemService(CAMERA_SERVICE);
         openCamera();
     }
 
 
     public void openCamera() {
-        cameraManager = (CameraManager) getSystemService(CAMERA_SERVICE);
         try {
             String[] idList = cameraManager.getCameraIdList();
             String firstCameraId = idList[0];
@@ -58,13 +58,26 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void requestCameraPermission() {
-        //TODO request camera permisson
+        requestPermissions(new String[]{Manifest.permission.CAMERA}, REQUEST_TO_OPEN_CAMERA);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case REQUEST_TO_OPEN_CAMERA:
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    openCamera();
+                }
+                break;
+        }
+
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
     private final CameraDevice.StateCallback openCameraStateCallback = new CameraDevice.StateCallback() {
         @Override
         public void onOpened(@NonNull CameraDevice camera) {
-
+            System.out.println(camera);
         }
 
         @Override
