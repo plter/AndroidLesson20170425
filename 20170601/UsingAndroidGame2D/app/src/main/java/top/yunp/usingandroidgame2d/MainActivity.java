@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.graphics.Color;
 import android.graphics.Path;
 import android.os.Bundle;
-import android.widget.Toast;
 
 import top.yunp.androidgame2d.display.Container;
 import top.yunp.androidgame2d.display.GameView;

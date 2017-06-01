@@ -104,7 +104,7 @@ public class Container extends Display implements IContainer {
 
             @Override
             public void onRead(Display d, ArrayItem<Display> currentItem) {
-                if (d.visible) {
+                if (d.isVisible()) {
                     d.internal_draw(canvas);
                 }
             }
@@ -119,7 +119,7 @@ public class Container extends Display implements IContainer {
 
             @Override
             public void onRead(Display d, ArrayItem<Display> currentItem) {
-                if (d.isTouchEnable() && d.hitTest(e.getX(), e.getY())) {
+                if (d.isVisible() && d.isTouchEnable() && d.hitTest(e.getX(), e.getY())) {
                     d.internal_dispatchTouchEvent(new TouchEvent(e.getName(), d, e.getRelatedMotionEvent()));
 
                     break_();
