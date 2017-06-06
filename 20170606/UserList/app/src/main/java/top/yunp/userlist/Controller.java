@@ -30,30 +30,30 @@ public class Controller {
 
     private void connectSqliteDatabase() {
         database = binding.getRoot().getContext().openOrCreateDatabase("users", Context.MODE_PRIVATE, null);
-        database.execSQL("CREATE TABLE user (" +
+        database.execSQL("CREATE TABLE IF NOT EXISTS user(" +
                 "_id INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "name TEXT NOT NULL DEFAULT \"\"," +
                 "age TEXT NOT NULL DEFAULT \"\")");
 
-        ContentValues cvs = new ContentValues();
-        cvs.put("name", "张三");
-        cvs.put("age", "12");
-        database.insert("user", "", cvs);
-
-        cvs = new ContentValues();
-        cvs.put("name", "李四");
-        cvs.put("age", "13");
-        database.insert("user", "", cvs);
-
-        cvs = new ContentValues();
-        cvs.put("name", "王五");
-        cvs.put("age", "10");
-        database.insert("user", "", cvs);
-
-        cvs = new ContentValues();
-        cvs.put("name", "赵六");
-        cvs.put("age", "16");
-        database.insert("user", "", cvs);
+//        ContentValues cvs = new ContentValues();
+//        cvs.put("name", "张三");
+//        cvs.put("age", "12");
+//        database.insert("user", "", cvs);
+//
+//        cvs = new ContentValues();
+//        cvs.put("name", "李四");
+//        cvs.put("age", "13");
+//        database.insert("user", "", cvs);
+//
+//        cvs = new ContentValues();
+//        cvs.put("name", "王五");
+//        cvs.put("age", "10");
+//        database.insert("user", "", cvs);
+//
+//        cvs = new ContentValues();
+//        cvs.put("name", "赵六");
+//        cvs.put("age", "16");
+//        database.insert("user", "", cvs);
     }
 
 
