@@ -25,6 +25,7 @@ public class BoardView extends SurfaceView implements View.OnTouchListener, Surf
         paint.setColor(0xffff0000);
         paint.setStrokeWidth(5);
         paint.setStyle(Paint.Style.STROKE);
+        paint.setStrokeCap(Paint.Cap.ROUND);
 
         setOnTouchListener(this);
         getHolder().addCallback(this);
