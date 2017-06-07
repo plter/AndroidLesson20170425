@@ -1,4 +1,4 @@
-package top.yunp.addusertolist;
+package top.yunp.addusers;
 
 import android.content.ContentValues;
 import android.content.Intent;
@@ -19,11 +19,12 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    private SQLiteDatabase database;
     private RecyclerView userList;
     private UserListAdapter adapter;
+    private DbConnector dbConnector;
 
     public static final int REQUEST_CODE_ADD_USER = 2;
+    private SQLiteDatabase readableDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,40 +52,26 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void connectDb() {
-        database = openOrCreateDatabase("data.db", MODE_PRIVATE, new SQLiteDatabase.CursorFactory() {
-            @Override
-            public Cursor newCursor(SQLiteDatabase db, SQLiteCursorDriver masterQuery, String editTable, SQLiteQuery query) {
-                return new UserCursor(masterQuery, editTable, query);
-            }
-        });
-        initDb();
+        dbConnector = new DbConnector(this);
+        readableDatabase = dbConnector.getReadableDatabase();
     }
 
-
-    private void initDb() {
-        database.execSQL("CREATE TABLE IF NOT EXISTS user(" +
-                "_id INTEGER PRIMARY KEY AUTOINCREMENT," +
-                "name TEXT NOT NULL DEFAULT NONE," +
-                "age INTEGER NOT NULL DEFAULT 1)");
-    }
 
     private void readFromDb() {
-        UserCursor userCursor = (UserCursor) database.query("user", null, null, null, null, null, null);
+        UserCursor userCursor = (UserCursor) readableDatabase.query("user", null, null, null, null, null, null);
         adapter.setCursor(userCursor);
     }
 
 
     @Override
     protected void onDestroy() {
-        database.close();
+        readableDatabase.close();
+        dbConnector.close();
         super.onDestroy();
     }
 
     private void insertUserToDb(String name, int age) {
-        ContentValues cvs = new ContentValues();
-        cvs.put("name", name);
-        cvs.put("age", age);
-        database.insert("user", "", cvs);
+        dbConnector.insertUser(name, age);
 
         readFromDb();
     }
