@@ -1,7 +1,6 @@
 package top.yunp.addusertolist;
 
 import android.content.Context;
-import android.database.Cursor;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -13,9 +12,9 @@ import android.view.ViewGroup;
 public class UserListAdapter extends RecyclerView.Adapter<UserListItem> {
 
     private final Context context;
-    private Cursor cursor;
+    private UserCursor cursor;
 
-    public UserListAdapter(Cursor cursor, Context context) {
+    public UserListAdapter(UserCursor cursor, Context context) {
         setCursor(cursor);
 
         this.context = context;
@@ -31,11 +30,8 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListItem> {
         if (cursor != null) {
             cursor.moveToPosition(position);
 
-            String name = cursor.getString(cursor.getColumnIndex("name"));
-            int age = cursor.getInt(cursor.getColumnIndex("age"));
-
-            holder.getTvName().setText(name);
-            holder.getTvAge().setText(String.valueOf(age));
+            holder.getTvName().setText(cursor.getName());
+            holder.getTvAge().setText(String.valueOf(cursor.getAge()));
         }
     }
 
@@ -44,7 +40,7 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListItem> {
         return cursor != null ? cursor.getCount() : 0;
     }
 
-    public void setCursor(Cursor cursor) {
+    public void setCursor(UserCursor cursor) {
         if (this.cursor != null) {
             this.cursor.close();
         }

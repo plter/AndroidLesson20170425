@@ -3,7 +3,9 @@ package top.yunp.addusertolist;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteCursorDriver;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteQuery;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -48,7 +50,12 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void connectDb() {
-        database = openOrCreateDatabase("data.db", MODE_PRIVATE, null);
+        database = openOrCreateDatabase("data.db", MODE_PRIVATE, new SQLiteDatabase.CursorFactory() {
+            @Override
+            public Cursor newCursor(SQLiteDatabase db, SQLiteCursorDriver masterQuery, String editTable, SQLiteQuery query) {
+                return new UserCursor(masterQuery, editTable, query);
+            }
+        });
         initDb();
     }
 
@@ -61,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void readFromDb() {
-        Cursor userCursor = database.query("user", null, null, null, null, null, null);
+        UserCursor userCursor = (UserCursor) database.query("user", null, null, null, null, null, null);
         adapter.setCursor(userCursor);
     }
 
