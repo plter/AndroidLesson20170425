@@ -60,7 +60,15 @@ public class DbConnector extends SQLiteOpenHelper {
      * @param id
      */
     public void delete(int id) {
-        writableDatabase.delete(USER_TABLE_NAME, "_id=?", new String[]{String.valueOf(id)});
+        writableDatabase.delete(USER_TABLE_NAME, ID_COLUMN_NAME + "=?", new String[]{String.valueOf(id)});
+    }
+
+    public void updateUser(int id, String userName, int age) {
+        ContentValues cvs = new ContentValues();
+        cvs.put(NAME_COLUMN_NAME, userName);
+        cvs.put(AGE_COLUMN_NAME, age);
+
+        writableDatabase.update(USER_TABLE_NAME, cvs, ID_COLUMN_NAME + "=?", new String[]{String.valueOf(id)});
     }
 
     public void close() {

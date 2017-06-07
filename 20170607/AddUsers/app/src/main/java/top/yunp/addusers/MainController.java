@@ -3,7 +3,6 @@ package top.yunp.addusers;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Toast;
@@ -20,6 +19,7 @@ public class MainController {
     private MainActivity mainActivity;
     private DbConnector dbConnector;
     public static final int REQUEST_CODE_ADD_USER = 2;
+    public static final int REQUEST_CODE_EDIT_USER = 3;
     private UserListAdapter adapter;
 
     public MainController(ActivityMainBinding binding, MainActivity mainActivity) {
@@ -38,6 +38,27 @@ public class MainController {
     }
 
     private void addListeners() {
+        addUserListItemLongClickListener();
+        addUserListItemClickListener();
+    }
+
+    private void addUserListItemClickListener() {
+        binding.userList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                UserCursor cursor = adapter.getItem(position);
+
+                Intent intent = new Intent(mainActivity, EditUserActivity.class);
+                intent.putExtra(EditUserActivity.KEY_USER_ID, cursor.getId());
+                intent.putExtra(EditUserActivity.KEY_USER_NAME, cursor.getName());
+                intent.putExtra(EditUserActivity.KEY_USER_AGE, cursor.getAge());
+
+                mainActivity.startActivityForResult(intent, REQUEST_CODE_EDIT_USER);
+            }
+        });
+    }
+
+    private void addUserListItemLongClickListener() {
         binding.userList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
@@ -78,6 +99,18 @@ public class MainController {
                         break;
                     case EditUserActivity.RESULT_CLOSE:
                         Toast.makeText(mainActivity, "没有可保存的数据", Toast.LENGTH_SHORT).show();
+                        break;
+                }
+                break;
+            case REQUEST_CODE_EDIT_USER:
+                switch (resultCode) {
+                    case EditUserActivity.RESULT_SAVE:
+
+                        int id = data.getIntExtra(EditUserActivity.KEY_USER_ID, 0);
+                        if (id > 0) {
+                            dbConnector.updateUser(id, data.getStringExtra(EditUserActivity.KEY_USER_NAME), data.getIntExtra(EditUserActivity.KEY_USER_AGE, 1));
+                            readFromDb();
+                        }
                         break;
                 }
                 break;
