@@ -8,13 +8,11 @@ import android.widget.TextView;
  * Created by plter on 6/6/17.
  */
 
-public class UserListItem extends RecyclerView.ViewHolder {
+public class UserListItem {
 
     private TextView tvName, tvAge;
 
     public UserListItem(View itemView) {
-        super(itemView);
-
         tvAge = (TextView) itemView.findViewById(R.id.tvAge);
         tvName = (TextView) itemView.findViewById(R.id.tvName);
     }

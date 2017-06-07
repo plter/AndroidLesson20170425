@@ -1,15 +1,16 @@
 package top.yunp.addusers;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 
 /**
  * Created by plter on 6/6/17.
  */
 
-public class UserListAdapter extends RecyclerView.Adapter<UserListItem> {
+public class UserListAdapter extends BaseAdapter {
 
     private final Context context;
     private UserCursor cursor;
@@ -18,26 +19,6 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListItem> {
         setCursor(cursor);
 
         this.context = context;
-    }
-
-    @Override
-    public UserListItem onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new UserListItem(LayoutInflater.from(getContext()).inflate(R.layout.list_item_view, null));
-    }
-
-    @Override
-    public void onBindViewHolder(UserListItem holder, int position) {
-        if (cursor != null) {
-            cursor.moveToPosition(position);
-
-            holder.getTvName().setText(cursor.getName());
-            holder.getTvAge().setText(String.valueOf(cursor.getAge()));
-        }
-    }
-
-    @Override
-    public int getItemCount() {
-        return cursor != null ? cursor.getCount() : 0;
     }
 
     public void setCursor(UserCursor cursor) {
@@ -52,5 +33,35 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListItem> {
 
     public Context getContext() {
         return context;
+    }
+
+    @Override
+    public int getCount() {
+        return cursor != null ? cursor.getCount() : 0;
+    }
+
+    @Override
+    public UserCursor getItem(int position) {
+        this.cursor.moveToPosition(position);
+        return this.cursor;
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        if (convertView == null) {
+            convertView = LayoutInflater.from(context).inflate(R.layout.list_item_view, null);
+            convertView.setTag(new UserListItem(convertView));
+        }
+
+        UserCursor cursor = getItem(position);
+        UserListItem itemView = (UserListItem) convertView.getTag();
+        itemView.getTvName().setText(cursor.getName());
+        itemView.getTvAge().setText(String.valueOf(cursor.getAge()));
+        return convertView;
     }
 }

@@ -13,6 +13,10 @@ public class UserCursor extends SQLiteCursor {
         super(driver, editTable, query);
     }
 
+    public int getId() {
+        return getInt(getColumnIndex(DbConnector.ID_COLUMN_NAME));
+    }
+
     public String getName() {
         return getString(getColumnIndex(DbConnector.NAME_COLUMN_NAME));
     }

@@ -21,6 +21,7 @@ public class DbConnector extends SQLiteOpenHelper {
     public static final String NAME_COLUMN_NAME = "name";
     public static final String AGE_COLUMN_NAME = "age";
     private SQLiteDatabase writableDatabase;
+    private SQLiteDatabase readableDatabase;
 
     public DbConnector(Context context) {
         super(context, DB_NAME, new SQLiteDatabase.CursorFactory() {
@@ -29,6 +30,9 @@ public class DbConnector extends SQLiteOpenHelper {
                 return new UserCursor(masterQuery, editTable, query);
             }
         }, DB_VERSION);
+
+        writableDatabase = getWritableDatabase();
+        readableDatabase = getReadableDatabase();
     }
 
     @Override
@@ -40,12 +44,23 @@ public class DbConnector extends SQLiteOpenHelper {
     }
 
     public void insertUser(String name, int age) {
-        writableDatabase = getWritableDatabase();
-
         ContentValues cvs = new ContentValues();
         cvs.put(NAME_COLUMN_NAME, name);
         cvs.put(AGE_COLUMN_NAME, age);
         writableDatabase.insert(USER_TABLE_NAME, "", cvs);
+    }
+
+    public UserCursor queryUsers() {
+        return (UserCursor) readableDatabase.query("user", null, null, null, null, null, null);
+    }
+
+    /**
+     * 根据id删除该条数据
+     *
+     * @param id
+     */
+    public void delete(int id) {
+        writableDatabase.delete(USER_TABLE_NAME, "_id=?", new String[]{String.valueOf(id)});
     }
 
     public void close() {
