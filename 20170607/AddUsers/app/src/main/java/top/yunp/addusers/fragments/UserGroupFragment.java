@@ -21,7 +21,7 @@ import top.yunp.addusers.models.UserGroup;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class UserGroupFragment extends Fragment {
+public class UserGroupFragment extends AbstractFragment {
 
 
     private FragmentUserGroupBinding binding;
@@ -71,4 +71,9 @@ public class UserGroupFragment extends Fragment {
         binding.groupListView.setAdapter(new ArrayAdapter<UserGroup>(getContext(), android.R.layout.simple_list_item_1, items));
     }
 
+    @Override
+    public void onAddButtonClicked(View v) {
+        binding.getRoot().setVisibility(View.GONE);
+        getFragmentManager().beginTransaction().add(R.id.fragmentContainer, new EditGroupFragment()).commit();
+    }
 }
