@@ -76,6 +76,30 @@ public class DbConnector extends SQLiteOpenHelper {
     }
 
     /**
+     * 添加一个组
+     *
+     * @param name
+     */
+    public void addGroup(String name) {
+        ContentValues cvs = new ContentValues();
+        cvs.put(COLUMN_NAME_NAME, name);
+        getWritableDatabase().insert(TABLE_NAME_GROUP, null, cvs);
+    }
+
+    /**
+     * 修改组
+     *
+     * @param groupId
+     * @param name
+     */
+    public void editGroup(int groupId, String name) {
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_NAME_NAME, name);
+
+        getWritableDatabase().update(TABLE_NAME_GROUP, values, COLUMN_NAME_ID + "=?", new String[]{String.valueOf(groupId)});
+    }
+
+    /**
      * 根据id删除该条数据
      *
      * @param id
@@ -90,6 +114,15 @@ public class DbConnector extends SQLiteOpenHelper {
         cvs.put(COLUMN_NAME_AGE, age);
 
         writableDatabase.update(TABLE_NAME_USER, cvs, COLUMN_NAME_ID + "=?", new String[]{String.valueOf(id)});
+    }
+
+    /**
+     * 根据id删除用户组
+     *
+     * @param id
+     */
+    public void deleteGroup(int id) {
+        writableDatabase.delete(TABLE_NAME_GROUP, COLUMN_NAME_ID + "=?", new String[]{String.valueOf(id)});
     }
 
     public void close() {

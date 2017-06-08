@@ -39,4 +39,11 @@ public class UserGroupListFragment extends AbstractFragment {
         setBinding(binding);
         return binding.getRoot();
     }
+
+    @Override
+    public void onBackToFragment() {
+        super.onBackToFragment();
+
+        controller.onBackToFragment();
+    }
 }

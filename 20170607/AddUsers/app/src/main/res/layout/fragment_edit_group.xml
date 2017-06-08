@@ -36,6 +36,7 @@
             android:layout_gravity="bottom|right"
             android:layout_margin="16dp"
             android:src="@mipmap/ic_save"
+            android:onClick="@{controller::btnSaveClicked}"
             app:backgroundTint="@android:color/holo_orange_light" />
 
         <android.support.design.widget.FloatingActionButton
@@ -43,6 +44,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|left"
             android:layout_margin="16dp"
+            android:onClick="@{controller::btnCancelClicked}"
             android:src="@android:drawable/ic_menu_close_clear_cancel"
             app:backgroundTint="@android:color/holo_orange_light" />
     </FrameLayout>

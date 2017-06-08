@@ -1,8 +1,6 @@
 package top.yunp.addusers.controllers;
 
-import android.databinding.ViewDataBinding;
 import android.support.v4.app.FragmentManager;
-import android.view.View;
 
 import top.yunp.addusers.R;
 import top.yunp.addusers.activities.MainActivity;
@@ -42,13 +40,10 @@ public class MainController {
                 if (supportFragmentManager.getBackStackEntryCount() > 0) {
                     FragmentManager.BackStackEntry topSE = supportFragmentManager.getBackStackEntryAt(supportFragmentManager.getBackStackEntryCount() - 1);
                     if (topSE instanceof AbstractFragment) {
-                        ViewDataBinding binding = ((AbstractFragment) topSE).getBinding();
-                        if (binding != null) {
-                            binding.getRoot().setVisibility(View.VISIBLE);
-                        }
+                        ((AbstractFragment) topSE).onBackToFragment();
                     }
                 } else {
-                    userGroupListFragment.getBinding().getRoot().setVisibility(View.VISIBLE);
+                    userGroupListFragment.onBackToFragment();
                 }
             }
         });
