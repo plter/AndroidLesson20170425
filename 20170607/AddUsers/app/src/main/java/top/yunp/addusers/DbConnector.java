@@ -15,11 +15,15 @@ import android.database.sqlite.SQLiteQuery;
 public class DbConnector extends SQLiteOpenHelper {
 
     public static final String DB_NAME = "users.db";
-    public static final int DB_VERSION = 1;
-    public static final String USER_TABLE_NAME = "user";
-    public static final String ID_COLUMN_NAME = "_id";
-    public static final String NAME_COLUMN_NAME = "name";
-    public static final String AGE_COLUMN_NAME = "age";
+    public static final int DB_VERSION = 2;
+    public static final String TABLE_NAME_USER = "user";
+    public static final String COLUMN_NAME_ID = "_id";
+    public static final String COLUMN_NAME_NAME = "name";
+    public static final String COLUMN_NAME_AGE = "age";
+
+    public static final String TABLE_NAME_GROUP = "group";
+    public static final String COLUMN_NAME_GROUP_ID = "group_id";
+
     private SQLiteDatabase writableDatabase;
     private SQLiteDatabase readableDatabase;
 
@@ -37,17 +41,30 @@ public class DbConnector extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE IF NOT EXISTS " + USER_TABLE_NAME + "(" +
-                ID_COLUMN_NAME + " INTEGER PRIMARY KEY AUTOINCREMENT," +
-                NAME_COLUMN_NAME + " TEXT NOT NULL DEFAULT NONE," +
-                AGE_COLUMN_NAME + " INTEGER DEFAULT 1)");
+        db.execSQL("CREATE TABLE " + TABLE_NAME_GROUP + "(" +
+                COLUMN_NAME_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+                COLUMN_NAME_NAME + " TEXT NOT NULL DEFAULT \"default group\")");
+        initGroupData();
+
+        db.execSQL("CREATE TABLE " + TABLE_NAME_USER + "(" +
+                COLUMN_NAME_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+                COLUMN_NAME_NAME + " TEXT NOT NULL DEFAULT NONE," +
+                COLUMN_NAME_AGE + " INTEGER DEFAULT 1," +
+                COLUMN_NAME_GROUP_ID + " INTEGER DEFAULT 1)");
+
+
+        //v1
+//        db.execSQL("CREATE TABLE IF NOT EXISTS " + TABLE_NAME_USER + "(" +
+//                COLUMN_NAME_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+//                COLUMN_NAME_NAME + " TEXT NOT NULL DEFAULT NONE," +
+//                COLUMN_NAME_AGE + " INTEGER DEFAULT 1)");
     }
 
     public void insertUser(String name, int age) {
         ContentValues cvs = new ContentValues();
-        cvs.put(NAME_COLUMN_NAME, name);
-        cvs.put(AGE_COLUMN_NAME, age);
-        writableDatabase.insert(USER_TABLE_NAME, "", cvs);
+        cvs.put(COLUMN_NAME_NAME, name);
+        cvs.put(COLUMN_NAME_AGE, age);
+        writableDatabase.insert(TABLE_NAME_USER, "", cvs);
     }
 
     public UserCursor queryUsers() {
@@ -60,15 +77,15 @@ public class DbConnector extends SQLiteOpenHelper {
      * @param id
      */
     public void delete(int id) {
-        writableDatabase.delete(USER_TABLE_NAME, ID_COLUMN_NAME + "=?", new String[]{String.valueOf(id)});
+        writableDatabase.delete(TABLE_NAME_USER, COLUMN_NAME_ID + "=?", new String[]{String.valueOf(id)});
     }
 
     public void updateUser(int id, String userName, int age) {
         ContentValues cvs = new ContentValues();
-        cvs.put(NAME_COLUMN_NAME, userName);
-        cvs.put(AGE_COLUMN_NAME, age);
+        cvs.put(COLUMN_NAME_NAME, userName);
+        cvs.put(COLUMN_NAME_AGE, age);
 
-        writableDatabase.update(USER_TABLE_NAME, cvs, ID_COLUMN_NAME + "=?", new String[]{String.valueOf(id)});
+        writableDatabase.update(TABLE_NAME_USER, cvs, COLUMN_NAME_ID + "=?", new String[]{String.valueOf(id)});
     }
 
     public void close() {
@@ -77,6 +94,25 @@ public class DbConnector extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        //upgrade from 1 to 2
+        if (oldVersion == 1 && newVersion == 2) {
+            db.execSQL("CREATE TABLE " + TABLE_NAME_GROUP + "(" +
+                    COLUMN_NAME_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+                    COLUMN_NAME_NAME + " TEXT NOT NULL DEFAULT \"default group\")");
+            initGroupData();
 
+            //upgrade user table
+            db.execSQL("ALTER TABLE " + TABLE_NAME_USER + " ADD COLUMN " + COLUMN_NAME_GROUP_ID + " INTEGER DEFAULT 1");
+        }
+    }
+
+    /**
+     * 初始化用户组数据
+     */
+    private void initGroupData() {
+        ContentValues cvs = new ContentValues();
+        cvs.put(COLUMN_NAME_ID, 1);
+        cvs.put(COLUMN_NAME_NAME, "default group");
+        writableDatabase.insert(TABLE_NAME_GROUP, null, cvs);
     }
 }

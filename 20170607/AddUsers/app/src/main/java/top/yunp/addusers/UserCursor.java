@@ -14,14 +14,14 @@ public class UserCursor extends SQLiteCursor {
     }
 
     public int getId() {
-        return getInt(getColumnIndex(DbConnector.ID_COLUMN_NAME));
+        return getInt(getColumnIndex(DbConnector.COLUMN_NAME_ID));
     }
 
     public String getName() {
-        return getString(getColumnIndex(DbConnector.NAME_COLUMN_NAME));
+        return getString(getColumnIndex(DbConnector.COLUMN_NAME_NAME));
     }
 
     public int getAge() {
-        return getInt(getColumnIndex(DbConnector.AGE_COLUMN_NAME));
+        return getInt(getColumnIndex(DbConnector.COLUMN_NAME_AGE));
     }
 }
