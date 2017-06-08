@@ -21,7 +21,7 @@ public class DbConnector extends SQLiteOpenHelper {
     public static final String COLUMN_NAME_NAME = "name";
     public static final String COLUMN_NAME_AGE = "age";
 
-    public static final String TABLE_NAME_GROUP = "group";
+    public static final String TABLE_NAME_GROUP = "user_group";
     public static final String COLUMN_NAME_GROUP_ID = "group_id";
 
     private SQLiteDatabase writableDatabase;
@@ -44,7 +44,7 @@ public class DbConnector extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE " + TABLE_NAME_GROUP + "(" +
                 COLUMN_NAME_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                 COLUMN_NAME_NAME + " TEXT NOT NULL DEFAULT \"default group\")");
-        initGroupData();
+        initGroupData(db);
 
         db.execSQL("CREATE TABLE " + TABLE_NAME_USER + "(" +
                 COLUMN_NAME_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
@@ -99,7 +99,7 @@ public class DbConnector extends SQLiteOpenHelper {
             db.execSQL("CREATE TABLE " + TABLE_NAME_GROUP + "(" +
                     COLUMN_NAME_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                     COLUMN_NAME_NAME + " TEXT NOT NULL DEFAULT \"default group\")");
-            initGroupData();
+            initGroupData(db);
 
             //upgrade user table
             db.execSQL("ALTER TABLE " + TABLE_NAME_USER + " ADD COLUMN " + COLUMN_NAME_GROUP_ID + " INTEGER DEFAULT 1");
@@ -109,10 +109,10 @@ public class DbConnector extends SQLiteOpenHelper {
     /**
      * 初始化用户组数据
      */
-    private void initGroupData() {
+    private void initGroupData(SQLiteDatabase db) {
         ContentValues cvs = new ContentValues();
         cvs.put(COLUMN_NAME_ID, 1);
         cvs.put(COLUMN_NAME_NAME, "default group");
-        writableDatabase.insert(TABLE_NAME_GROUP, null, cvs);
+        db.insert(TABLE_NAME_GROUP, null, cvs);
     }
 }

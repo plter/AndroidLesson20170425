@@ -6,7 +6,7 @@
 ## v2结构
 
 ```sql
-CREATE TABLE IF NOT EXISTS group (
+CREATE TABLE IF NOT EXISTS user_group (
     _id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT NOT NULL DEFAULT \"default group\"
 )
@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS user(
 ContentValues cvs = new ContentValues();
 cvs.put("_id", 1);
 cvs.put("name", "default group");
-db.insert("group", null, cvs);
+db.insert("user_group", null, cvs);
 ```
 ## upgrade user table from 1 to 2
 
