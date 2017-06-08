@@ -1,6 +1,5 @@
 package top.yunp.addusers.controllers;
 
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Toast;
@@ -49,11 +48,11 @@ public class EditGroupFragmentController {
             } else {
                 dbConnector.addGroup(groupName);
             }
+            fragment.getFragmentManager().popBackStack();
         } else {
             Toast.makeText(fragment.getContext(), "请输入内容", Toast.LENGTH_SHORT).show();
         }
 
-        fragment.getFragmentManager().popBackStack();
     }
 
     public void onDestroy() {
