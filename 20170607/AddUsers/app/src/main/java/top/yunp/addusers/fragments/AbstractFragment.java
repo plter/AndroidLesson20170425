@@ -1,7 +1,7 @@
 package top.yunp.addusers.fragments;
 
+import android.databinding.ViewDataBinding;
 import android.support.v4.app.Fragment;
-import android.view.View;
 
 /**
  * Created by plter on 6/8/17.
@@ -9,6 +9,14 @@ import android.view.View;
 
 public abstract class AbstractFragment extends Fragment {
 
+    private ViewDataBinding binding;
 
-    public abstract void onAddButtonClicked(View v);
+
+    public ViewDataBinding getBinding() {
+        return binding;
+    }
+
+    public void setBinding(ViewDataBinding binding) {
+        this.binding = binding;
+    }
 }

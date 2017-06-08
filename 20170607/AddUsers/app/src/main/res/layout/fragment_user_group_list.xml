@@ -1,0 +1,30 @@
+<layout>
+
+    <data>
+
+        <variable
+            name="controller"
+            type="top.yunp.addusers.controllers.UserGroupListFragmentController" />
+    </data>
+
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="top.yunp.addusers.fragments.UserGroupListFragment">
+
+        <ListView
+            android:id="@+id/groupListView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/btnAddGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="@dimen/fab_margin"
+            android:onClick="@{controller::btnAddGroupClicked}"
+            android:src="@android:drawable/ic_input_add" />
+    </FrameLayout>
+</layout>
