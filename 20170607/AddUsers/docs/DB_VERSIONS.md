@@ -18,13 +18,13 @@ CREATE TABLE IF NOT EXISTS user(
     group_id INTEGER DEFAULT 1
 )
 ```
-## v2初始化数据
+## v2初始化用户组数据
 
 ```java
 ContentValues cvs = new ContentValues();
-cvs.put(COLUMN_NAME_ID, 1);
-cvs.put(COLUMN_NAME_NAME, "default group");
-db.insert(TABLE_NAME_GROUP, null, cvs);
+cvs.put("_id", 1);
+cvs.put("name", "default group");
+db.insert("group", null, cvs);
 ```
 ## upgrade user table from 1 to 2
 
