@@ -1,0 +1,11 @@
+# 数据库版本描述
+
+# v1数据库结构
+
+```sql
+CREATE TABLE IF NOT EXISTS user(
+    _id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL DEFAULT NONE,
+    age INTEGER DEFAULT 1
+)
+```
