@@ -1,12 +1,13 @@
-package top.yunp.addusers;
+package top.yunp.addusers.activities;
 
-import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import top.yunp.addusers.R;
+import top.yunp.addusers.controllers.MainController;
 import top.yunp.addusers.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
@@ -24,19 +25,6 @@ public class MainActivity extends AppCompatActivity {
         binding.setController(mainController);
     }
 
-
-    @Override
-    protected void onDestroy() {
-        mainController.onDestroy();
-        super.onDestroy();
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        mainController.onActivityResult(requestCode, resultCode, data);
-
-        super.onActivityResult(requestCode, resultCode, data);
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

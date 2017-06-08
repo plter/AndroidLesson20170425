@@ -1,10 +1,13 @@
-package top.yunp.addusers;
+package top.yunp.addusers.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+
+import top.yunp.addusers.R;
+import top.yunp.addusers.db.DbCursor;
 
 /**
  * Created by plter on 6/6/17.
@@ -13,15 +16,15 @@ import android.widget.BaseAdapter;
 public class UserListAdapter extends BaseAdapter {
 
     private final Context context;
-    private UserCursor cursor;
+    private DbCursor cursor;
 
-    public UserListAdapter(UserCursor cursor, Context context) {
+    public UserListAdapter(DbCursor cursor, Context context) {
         setCursor(cursor);
 
         this.context = context;
     }
 
-    public void setCursor(UserCursor cursor) {
+    public void setCursor(DbCursor cursor) {
         if (this.cursor != null) {
             this.cursor.close();
         }
@@ -41,7 +44,7 @@ public class UserListAdapter extends BaseAdapter {
     }
 
     @Override
-    public UserCursor getItem(int position) {
+    public DbCursor getItem(int position) {
         this.cursor.moveToPosition(position);
         return this.cursor;
     }
@@ -58,7 +61,7 @@ public class UserListAdapter extends BaseAdapter {
             convertView.setTag(new UserListItem(convertView));
         }
 
-        UserCursor cursor = getItem(position);
+        DbCursor cursor = getItem(position);
         UserListItem itemView = (UserListItem) convertView.getTag();
         itemView.getTvName().setText(cursor.getName());
         itemView.getTvAge().setText(String.valueOf(cursor.getAge()));

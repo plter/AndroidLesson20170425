@@ -1,19 +1,20 @@
-package top.yunp.addusers;
+package top.yunp.addusers.controllers;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Toast;
 
+import top.yunp.addusers.activities.EditUserActivity;
+import top.yunp.addusers.activities.MainActivity;
+import top.yunp.addusers.adapters.UserListAdapter;
 import top.yunp.addusers.databinding.ActivityMainBinding;
+import top.yunp.addusers.db.DbConnector;
 
 /**
  * Created by plter on 6/7/17.
  */
 
-public class MainController {
+public class UserListController {
 
     private ActivityMainBinding binding;
     private MainActivity mainActivity;
@@ -22,19 +23,19 @@ public class MainController {
     public static final int REQUEST_CODE_EDIT_USER = 3;
     private UserListAdapter adapter;
 
-    public MainController(ActivityMainBinding binding, MainActivity mainActivity) {
+    public UserListController(ActivityMainBinding binding, MainActivity mainActivity) {
         this.binding = binding;
         this.mainActivity = mainActivity;
 
         dbConnector = new DbConnector(mainActivity);
 
         //config user list
-        adapter = new UserListAdapter(null, mainActivity);
-        binding.userList.setAdapter(adapter);
-
-        addListeners();
-
-        readFromDb();
+//        adapter = new UserListAdapter(null, mainActivity);
+//        binding.userList.setAdapter(adapter);
+//
+//        addListeners();
+//
+//        readFromDb();
     }
 
     private void addListeners() {
@@ -43,44 +44,44 @@ public class MainController {
     }
 
     private void addUserListItemClickListener() {
-        binding.userList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                UserCursor cursor = adapter.getItem(position);
-
-                Intent intent = new Intent(mainActivity, EditUserActivity.class);
-                intent.putExtra(EditUserActivity.KEY_USER_ID, cursor.getId());
-                intent.putExtra(EditUserActivity.KEY_USER_NAME, cursor.getName());
-                intent.putExtra(EditUserActivity.KEY_USER_AGE, cursor.getAge());
-
-                mainActivity.startActivityForResult(intent, REQUEST_CODE_EDIT_USER);
-            }
-        });
+//        binding.userList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                UserCursor cursor = adapter.getItem(position);
+//
+//                Intent intent = new Intent(mainActivity, EditUserActivity.class);
+//                intent.putExtra(EditUserActivity.KEY_USER_ID, cursor.getId());
+//                intent.putExtra(EditUserActivity.KEY_USER_NAME, cursor.getName());
+//                intent.putExtra(EditUserActivity.KEY_USER_AGE, cursor.getAge());
+//
+//                mainActivity.startActivityForResult(intent, REQUEST_CODE_EDIT_USER);
+//            }
+//        });
     }
 
     private void addUserListItemLongClickListener() {
-        binding.userList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-
-                UserCursor cursor = adapter.getItem(position);
-                final int currentItemIdInDb = cursor.getId();
-
-                new AlertDialog.Builder(mainActivity)
-                        .setTitle("提示")
-                        .setMessage("你确定要删除该项吗？")
-                        .setPositiveButton("是的", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dbConnector.delete(currentItemIdInDb);
-                                readFromDb();
-                            }
-                        })
-                        .setNegativeButton("关闭", null)
-                        .show();
-                return true;
-            }
-        });
+//        binding.userList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+//            @Override
+//            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+//
+//                UserCursor cursor = adapter.getItem(position);
+//                final int currentItemIdInDb = cursor.getId();
+//
+//                new AlertDialog.Builder(mainActivity)
+//                        .setTitle("提示")
+//                        .setMessage("你确定要删除该项吗？")
+//                        .setPositiveButton("是的", new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialog, int which) {
+//                                dbConnector.deleteUserById(currentItemIdInDb);
+//                                readFromDb();
+//                            }
+//                        })
+//                        .setNegativeButton("关闭", null)
+//                        .show();
+//                return true;
+//            }
+//        });
     }
 
     public void btnAddUserClicked(View v) {

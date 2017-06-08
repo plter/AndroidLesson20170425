@@ -1,15 +1,17 @@
-package top.yunp.addusers;
+package top.yunp.addusers.db;
 
 import android.database.sqlite.SQLiteCursor;
 import android.database.sqlite.SQLiteCursorDriver;
 import android.database.sqlite.SQLiteQuery;
 
+import top.yunp.addusers.db.DbConnector;
+
 /**
  * Created by plter on 6/7/17.
  */
 
-public class UserCursor extends SQLiteCursor {
-    public UserCursor(SQLiteCursorDriver driver, String editTable, SQLiteQuery query) {
+public class DbCursor extends SQLiteCursor {
+    public DbCursor(SQLiteCursorDriver driver, String editTable, SQLiteQuery query) {
         super(driver, editTable, query);
     }
 

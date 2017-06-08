@@ -1,10 +1,12 @@
-package top.yunp.addusers;
+package top.yunp.addusers.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
+
+import top.yunp.addusers.R;
 
 public class EditUserActivity extends AppCompatActivity implements View.OnClickListener {
 

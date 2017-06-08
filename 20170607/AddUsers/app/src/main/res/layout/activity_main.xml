@@ -6,7 +6,7 @@
 
         <variable
             name="controller"
-            type="top.yunp.addusers.MainController" />
+            type="top.yunp.addusers.controllers.MainController" />
     </data>
 
     <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -38,8 +38,8 @@
             tools:context="top.yunp.addusertolist.MainActivity"
             tools:showIn="@layout/activity_main">
 
-            <ListView
-                android:id="@+id/userList"
+            <FrameLayout
+                android:id="@+id/fragmentContainer"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="0dp"

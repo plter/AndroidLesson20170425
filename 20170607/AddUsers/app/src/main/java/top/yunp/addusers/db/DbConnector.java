@@ -1,4 +1,4 @@
-package top.yunp.addusers;
+package top.yunp.addusers.db;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -31,7 +31,7 @@ public class DbConnector extends SQLiteOpenHelper {
         super(context, DB_NAME, new SQLiteDatabase.CursorFactory() {
             @Override
             public Cursor newCursor(SQLiteDatabase db, SQLiteCursorDriver masterQuery, String editTable, SQLiteQuery query) {
-                return new UserCursor(masterQuery, editTable, query);
+                return new DbCursor(masterQuery, editTable, query);
             }
         }, DB_VERSION);
 
@@ -67,8 +67,12 @@ public class DbConnector extends SQLiteOpenHelper {
         writableDatabase.insert(TABLE_NAME_USER, "", cvs);
     }
 
-    public UserCursor queryUsers() {
-        return (UserCursor) readableDatabase.query("user", null, null, null, null, null, null);
+    public DbCursor queryUsers() {
+        return (DbCursor) readableDatabase.query("user", null, null, null, null, null, null);
+    }
+
+    public DbCursor queryGroups() {
+        return (DbCursor) readableDatabase.query(TABLE_NAME_GROUP, null, null, null, null, null, null);
     }
 
     /**
@@ -76,7 +80,7 @@ public class DbConnector extends SQLiteOpenHelper {
      *
      * @param id
      */
-    public void delete(int id) {
+    public void deleteUserById(int id) {
         writableDatabase.delete(TABLE_NAME_USER, COLUMN_NAME_ID + "=?", new String[]{String.valueOf(id)});
     }
 

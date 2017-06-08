@@ -1,8 +1,10 @@
-package top.yunp.addusers;
+package top.yunp.addusers.adapters;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
+
+import top.yunp.addusers.R;
 
 /**
  * Created by plter on 6/6/17.
