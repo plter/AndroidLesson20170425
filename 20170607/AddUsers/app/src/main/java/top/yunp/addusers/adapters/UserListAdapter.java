@@ -31,7 +31,8 @@ public class UserListAdapter extends BaseAdapter {
     public void setCursor(DbCursor cursor) {
 
         if (cursor != null) {
-            System.out.println(cursor.getCount() + "<<<<<<<");
+            users.clear();
+
             while (cursor.moveToNext()) {
                 users.add(new User(cursor.getId(), cursor.getName(), cursor.getAge()));
             }

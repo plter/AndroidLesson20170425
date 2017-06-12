@@ -1,4 +1,4 @@
-<layout>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
     <data>
@@ -12,12 +12,24 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@android:color/white"
+        android:clickable="true"
         tools:context="top.yunp.addusers.fragments.UserListFragment">
 
         <ListView
             android:id="@+id/userListView"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:layout_marginBottom="16dp"
+            android:layout_marginRight="16dp"
+            android:onClick="@{controller::btnAddUserClicked}"
+            android:src="@android:drawable/ic_input_add"
+            app:backgroundTint="?attr/actionModeSplitBackground" />
 
     </FrameLayout>
 </layout>

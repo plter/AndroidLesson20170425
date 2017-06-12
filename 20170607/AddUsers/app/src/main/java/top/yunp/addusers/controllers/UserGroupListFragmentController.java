@@ -40,8 +40,6 @@ public class UserGroupListFragmentController {
     }
 
     public void btnAddGroupClicked(View v) {
-        System.out.println("btnAddGroupClicked");
-        binding.getRoot().setVisibility(View.GONE);
         fragment.getFragmentManager()
                 .beginTransaction()
                 .add(R.id.fragmentContainer, EditGroupFragment.newInstance())
@@ -67,7 +65,7 @@ public class UserGroupListFragmentController {
         binding.groupListView.setAdapter(new ArrayAdapter<UserGroup>(fragment.getContext(), android.R.layout.simple_list_item_1, items));
     }
 
-    public void onBackToFragment() {
+    public void onNavigateTo() {
         readGroupsFromDb();
     }
 
@@ -84,7 +82,6 @@ public class UserGroupListFragmentController {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 UserGroup userGroup = (UserGroup) parent.getAdapter().getItem(position);
 
-                fragment.hide();
                 fragment.getFragmentManager()
                         .beginTransaction()
                         .add(R.id.fragmentContainer, UserListFragment.newInstance(userGroup.getId()))

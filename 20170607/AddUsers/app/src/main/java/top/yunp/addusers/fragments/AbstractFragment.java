@@ -32,18 +32,6 @@ public abstract class AbstractFragment extends Fragment {
     /**
      * 当FragmentManager后退导航到该Fragment时触发该事件
      */
-    public void onBackToFragment() {
-        if (getBinding() != null) {
-            getBinding().getRoot().setVisibility(View.VISIBLE);
-        }
-    }
-
-    /**
-     * 隐藏该界面，防止误操作
-     */
-    public void hide() {
-        if (getBinding() != null) {
-            getBinding().getRoot().setVisibility(View.GONE);
-        }
+    public void onNavigateTo() {
     }
 }

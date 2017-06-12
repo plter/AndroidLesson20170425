@@ -41,9 +41,9 @@ public class UserGroupListFragment extends AbstractFragment {
     }
 
     @Override
-    public void onBackToFragment() {
-        super.onBackToFragment();
+    public void onNavigateTo() {
+        super.onNavigateTo();
 
-        controller.onBackToFragment();
+        controller.onNavigateTo();
     }
 }

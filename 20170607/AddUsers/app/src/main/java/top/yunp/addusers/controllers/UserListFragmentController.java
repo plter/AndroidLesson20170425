@@ -103,8 +103,6 @@ public class UserListFragmentController {
     }
 
     private void showEditUserFragment(User user) {
-        fragment.hide();
-
         fragment.getFragmentManager()
                 .beginTransaction()
                 .add(R.id.fragmentContainer, EditUserFragment.newInstance(user.getId(), user.getName(), user.getAge()))
@@ -112,15 +110,12 @@ public class UserListFragmentController {
                 .commit();
     }
 
-//    public void btnAddUserClicked(View v) {
-//        fragment.startActivityForResult(new Intent(fragment.getContext(), EditUserActivity.class), REQUEST_CODE_ADD_USER);
-//    }
-
-
-    private void insertUserToDb(String name, int age) {
-        dbConnector.insertUser(name, age);
-
-        readFromDb();
+    public void btnAddUserClicked(View v) {
+        fragment.getFragmentManager()
+                .beginTransaction()
+                .add(R.id.fragmentContainer, EditUserFragment.newInstance(0, "", 1))
+                .addToBackStack(EditUserFragment.NAME)
+                .commit();
     }
 
     private void readFromDb() {
@@ -132,4 +127,7 @@ public class UserListFragmentController {
     }
 
 
+    public void onNavigateTo() {
+        readFromDb();
+    }
 }

@@ -1,6 +1,9 @@
 package top.yunp.addusers.controllers;
 
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+
+import java.util.List;
 
 import top.yunp.addusers.R;
 import top.yunp.addusers.activities.MainActivity;
@@ -17,7 +20,7 @@ public class MainController {
     private ActivityMainBinding binding;
     private MainActivity mainActivity;
     private FragmentManager supportFragmentManager;
-    private UserGroupListFragment userGroupListFragment;
+    private UserGroupListFragment fragment;
 
     public MainController(ActivityMainBinding binding, MainActivity mainActivity) {
         this.binding = binding;
@@ -26,10 +29,10 @@ public class MainController {
 
         addListeners();
 
-        userGroupListFragment = new UserGroupListFragment();
+        fragment = new UserGroupListFragment();
         mainActivity.getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.fragmentContainer, userGroupListFragment)
+                .replace(R.id.fragmentContainer, fragment)
                 .commit();
     }
 
@@ -37,13 +40,19 @@ public class MainController {
         supportFragmentManager.addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
             @Override
             public void onBackStackChanged() {
-                if (supportFragmentManager.getBackStackEntryCount() > 0) {
-                    FragmentManager.BackStackEntry topSE = supportFragmentManager.getBackStackEntryAt(supportFragmentManager.getBackStackEntryCount() - 1);
-                    if (topSE instanceof AbstractFragment) {
-                        ((AbstractFragment) topSE).onBackToFragment();
+
+                List<Fragment> fragments = supportFragmentManager.getFragments();
+                AbstractFragment lastFragment = null;
+
+                for (int i = fragments.size() - 1; i >= 0; i--) {
+                    lastFragment = (AbstractFragment) fragments.get(i);
+                    if (lastFragment != null) {
+                        break;
                     }
-                } else {
-                    userGroupListFragment.onBackToFragment();
+                }
+
+                if (lastFragment != null) {
+                    lastFragment.onNavigateTo();
                 }
             }
         });

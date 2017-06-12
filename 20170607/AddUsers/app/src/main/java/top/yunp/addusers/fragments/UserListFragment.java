@@ -74,4 +74,10 @@ public class UserListFragment extends AbstractFragment {
         controller.onDestroy();
         super.onDestroy();
     }
+
+    @Override
+    public void onNavigateTo() {
+        controller.onNavigateTo();
+        super.onNavigateTo();
+    }
 }

@@ -12,6 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@android:color/white"
+        android:clickable="true"
         tools:context="top.yunp.addusers.fragments.EditGroupFragment">
 
         <LinearLayout
@@ -35,8 +36,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|right"
             android:layout_margin="16dp"
-            android:src="@mipmap/ic_save"
             android:onClick="@{controller::btnSaveClicked}"
+            android:src="@mipmap/ic_save"
             app:backgroundTint="@android:color/holo_orange_light" />
 
         <android.support.design.widget.FloatingActionButton
