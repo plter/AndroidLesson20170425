@@ -14,10 +14,24 @@
         android:layout_height="match_parent"
         tools:context="top.yunp.addusers.fragments.UserListFragment">
 
-        <ListView
-            android:id="@+id/userListView"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/darker_gray"
+                android:text="用户列表"
+                android:textAppearance="?android:textAppearanceLarge" />
+
+            <ListView
+                android:id="@+id/userListView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+
 
         <android.support.design.widget.FloatingActionButton
             android:layout_width="wrap_content"
