@@ -13,7 +13,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Cursor cursor = getContentResolver().query(
-                Uri.parse("content://top.yunp.addusers.provider.UserDataProvider"),
+                Uri.parse("content://top.yunp.addusers.provider.UserDataProvider/user"),
                 null,
                 null,
                 null,
@@ -21,7 +21,20 @@ public class MainActivity extends AppCompatActivity {
         );
 
         while (cursor.moveToNext()) {
-            System.out.printf("_id=%d,name=%s,age=%d\n", cursor.getInt(0), cursor.getString(1), cursor.getInt(2));
+            for (int i = 0; i < cursor.getColumnCount(); i++) {
+                String columnName = cursor.getColumnName(i);
+                Object value = null;
+                switch (cursor.getType(i)) {
+                    case Cursor.FIELD_TYPE_INTEGER:
+                        value = cursor.getInt(i);
+                        break;
+                    case Cursor.FIELD_TYPE_STRING:
+                        value = cursor.getString(i);
+                        break;
+                }
+                System.out.print(columnName + "=" + value + ",");
+            }
+            System.out.println();
         }
     }
 }
