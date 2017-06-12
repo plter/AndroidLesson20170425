@@ -1,6 +1,8 @@
 package top.yunp.addusers.fragments;
 
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -23,12 +25,15 @@ public class EditUserFragment extends Fragment {
     public static final String ARG_USER_ID = "userId";
     public static final String ARG_USER_NAME = "userName";
     public static final String ARG_USER_AGE = "userAge";
+    public static final String ARG_GROUP_ID = "groupId";
+
     public static final String NAME = "EditUserFragment";
 
     // TODO: Rename and change types of parameters
     private int userId;
     private String userName;
     private int userAge;
+    private int groupId;
     private EditUserFragmentController controller;
 
 
@@ -45,9 +50,10 @@ public class EditUserFragment extends Fragment {
      * @return A new instance of fragment EditUserFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static EditUserFragment newInstance(int userId, String userName, int userAge) {
+    public static EditUserFragment newInstance(int groupId, int userId, String userName, int userAge) {
         EditUserFragment fragment = new EditUserFragment();
         Bundle args = new Bundle();
+        args.putInt(ARG_GROUP_ID, groupId);
         args.putInt(ARG_USER_ID, userId);
         args.putString(ARG_USER_NAME, userName);
         args.putInt(ARG_USER_AGE, userAge);
@@ -62,6 +68,27 @@ public class EditUserFragment extends Fragment {
             userId = getArguments().getInt(ARG_USER_ID);
             userName = getArguments().getString(ARG_USER_NAME);
             userAge = getArguments().getInt(ARG_USER_AGE);
+            groupId = getArguments().getInt(ARG_GROUP_ID);
+        }
+
+        //check group id
+        if (getGroupId() <= 0) {
+            new AlertDialog.Builder(getContext())
+                    .setTitle("警告")
+                    .setMessage("没有group id")
+                    .setPositiveButton("关闭", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            getFragmentManager().popBackStack();
+                        }
+                    })
+                    .setOnCancelListener(new DialogInterface.OnCancelListener() {
+                        @Override
+                        public void onCancel(DialogInterface dialog) {
+                            getFragmentManager().popBackStack();
+                        }
+                    })
+                    .show();
         }
     }
 
@@ -90,5 +117,9 @@ public class EditUserFragment extends Fragment {
 
     public int getUserAge() {
         return userAge;
+    }
+
+    public int getGroupId() {
+        return groupId;
     }
 }

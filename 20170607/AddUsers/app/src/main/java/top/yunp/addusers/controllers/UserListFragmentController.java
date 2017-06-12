@@ -24,8 +24,6 @@ public class UserListFragmentController {
     private FragmentUserListBinding binding;
     private UserListFragment fragment;
     private DbConnector dbConnector;
-    public static final int REQUEST_CODE_ADD_USER = 2;
-    public static final int REQUEST_CODE_EDIT_USER = 3;
     private UserListAdapter adapter;
 
     public UserListFragmentController(FragmentUserListBinding binding, UserListFragment fragment) {
@@ -105,7 +103,7 @@ public class UserListFragmentController {
     private void showEditUserFragment(User user) {
         fragment.getFragmentManager()
                 .beginTransaction()
-                .replace(R.id.fragmentContainer, EditUserFragment.newInstance(user.getId(), user.getName(), user.getAge()))
+                .replace(R.id.fragmentContainer, EditUserFragment.newInstance(fragment.getGroupId(), user.getId(), user.getName(), user.getAge()))
                 .addToBackStack(EditUserFragment.NAME)
                 .commit();
     }
@@ -113,7 +111,7 @@ public class UserListFragmentController {
     public void btnAddUserClicked(View v) {
         fragment.getFragmentManager()
                 .beginTransaction()
-                .replace(R.id.fragmentContainer, EditUserFragment.newInstance(0, "", 1))
+                .replace(R.id.fragmentContainer, EditUserFragment.newInstance(fragment.getGroupId(), 0, "", 1))
                 .addToBackStack(EditUserFragment.NAME)
                 .commit();
     }

@@ -49,9 +49,9 @@ public class EditUserFragmentController {
 
         //因为默认值是0，如果该值为0则意味着需要创建新用户
         if (fragment.getUserId() > 0) {
-            dbConnector.updateUser(fragment.getUserId(), name, age);
+            dbConnector.updateUser(fragment.getGroupId(), fragment.getUserId(), name, age);
         } else {
-            dbConnector.insertUser(name, age);
+            dbConnector.insertUser(fragment.getGroupId(), name, age);
         }
 
         finish();

@@ -60,13 +60,6 @@ public class DbConnector extends SQLiteOpenHelper {
 //                COLUMN_NAME_AGE + " INTEGER DEFAULT 1)");
     }
 
-    public void insertUser(String name, int age) {
-        ContentValues cvs = new ContentValues();
-        cvs.put(COLUMN_NAME_NAME, name);
-        cvs.put(COLUMN_NAME_AGE, age);
-        writableDatabase.insert(TABLE_NAME_USER, "", cvs);
-    }
-
     public DbCursor queryUsers() {
         return (DbCursor) readableDatabase.query("user", null, null, null, null, null, null);
     }
@@ -118,12 +111,21 @@ public class DbConnector extends SQLiteOpenHelper {
         writableDatabase.delete(TABLE_NAME_USER, COLUMN_NAME_ID + "=?", new String[]{String.valueOf(id)});
     }
 
-    public void updateUser(int id, String userName, int age) {
+    public void updateUser(int groupId, int id, String userName, int age) {
         ContentValues cvs = new ContentValues();
         cvs.put(COLUMN_NAME_NAME, userName);
         cvs.put(COLUMN_NAME_AGE, age);
+        cvs.put(COLUMN_NAME_GROUP_ID, groupId);
 
         writableDatabase.update(TABLE_NAME_USER, cvs, COLUMN_NAME_ID + "=?", new String[]{String.valueOf(id)});
+    }
+
+    public void insertUser(int groupId, String name, int age) {
+        ContentValues cvs = new ContentValues();
+        cvs.put(COLUMN_NAME_NAME, name);
+        cvs.put(COLUMN_NAME_AGE, age);
+        cvs.put(COLUMN_NAME_GROUP_ID, groupId);
+        writableDatabase.insert(TABLE_NAME_USER, "", cvs);
     }
 
     /**
