@@ -35,8 +35,8 @@ public class DbConnector extends SQLiteOpenHelper {
             }
         }, DB_VERSION);
 
-        writableDatabase = getWritableDatabase();
-        readableDatabase = getReadableDatabase();
+        writableDatabase = super.getWritableDatabase();
+        readableDatabase = super.getReadableDatabase();
     }
 
     @Override
@@ -163,5 +163,15 @@ public class DbConnector extends SQLiteOpenHelper {
         cvs.put(COLUMN_NAME_ID, 1);
         cvs.put(COLUMN_NAME_NAME, "default group");
         db.insert(TABLE_NAME_GROUP, null, cvs);
+    }
+
+    @Override
+    public SQLiteDatabase getReadableDatabase() {
+        return readableDatabase;
+    }
+
+    @Override
+    public SQLiteDatabase getWritableDatabase() {
+        return writableDatabase;
     }
 }
