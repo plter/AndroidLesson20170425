@@ -13,7 +13,7 @@ import top.yunp.addusers.databinding.FragmentUserGroupListBinding;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class UserGroupListFragment extends AbstractFragment {
+public class UserGroupListFragment extends Fragment {
 
 
     private FragmentUserGroupListBinding binding;
@@ -36,14 +36,6 @@ public class UserGroupListFragment extends AbstractFragment {
         binding = FragmentUserGroupListBinding.inflate(inflater);
         controller = new UserGroupListFragmentController(binding, this);
         binding.setController(controller);
-        setBinding(binding);
         return binding.getRoot();
-    }
-
-    @Override
-    public void onNavigateTo() {
-        super.onNavigateTo();
-
-        controller.onNavigateTo();
     }
 }

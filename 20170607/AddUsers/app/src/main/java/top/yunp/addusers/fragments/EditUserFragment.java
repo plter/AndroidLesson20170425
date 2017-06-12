@@ -17,7 +17,7 @@ import top.yunp.addusers.databinding.FragmentEditUserBinding;
  * Use the {@link EditUserFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class EditUserFragment extends AbstractFragment {
+public class EditUserFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     public static final String ARG_USER_ID = "userId";
@@ -71,7 +71,6 @@ public class EditUserFragment extends AbstractFragment {
         FragmentEditUserBinding binding = FragmentEditUserBinding.inflate(inflater);
         controller = new EditUserFragmentController(binding, this);
         binding.setController(controller);
-        setBinding(binding);
         return binding.getRoot();
     }
 

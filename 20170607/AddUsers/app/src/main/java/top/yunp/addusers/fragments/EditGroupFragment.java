@@ -13,7 +13,7 @@ import top.yunp.addusers.databinding.FragmentEditGroupBinding;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class EditGroupFragment extends AbstractFragment {
+public class EditGroupFragment extends Fragment {
 
 
     public static final String NAME = "EditGroupFragment";
@@ -54,7 +54,6 @@ public class EditGroupFragment extends AbstractFragment {
                              Bundle savedInstanceState) {
 
         binding = FragmentEditGroupBinding.inflate(inflater);
-        setBinding(binding);
         controller = new EditGroupFragmentController(binding, this);
         binding.setController(controller);
         return binding.getRoot();

@@ -42,7 +42,7 @@ public class UserGroupListFragmentController {
     public void btnAddGroupClicked(View v) {
         fragment.getFragmentManager()
                 .beginTransaction()
-                .add(R.id.fragmentContainer, EditGroupFragment.newInstance())
+                .replace(R.id.fragmentContainer, EditGroupFragment.newInstance())
                 .addToBackStack(EditGroupFragment.NAME)
                 .commit();
     }
@@ -84,7 +84,7 @@ public class UserGroupListFragmentController {
 
                 fragment.getFragmentManager()
                         .beginTransaction()
-                        .add(R.id.fragmentContainer, UserListFragment.newInstance(userGroup.getId()))
+                        .replace(R.id.fragmentContainer, UserListFragment.newInstance(userGroup.getId()))
                         .addToBackStack(UserListFragment.NAME)
                         .commit();
             }

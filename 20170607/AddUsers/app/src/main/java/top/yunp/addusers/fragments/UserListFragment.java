@@ -16,7 +16,7 @@ import top.yunp.addusers.databinding.FragmentUserListBinding;
  * Use the {@link UserListFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class UserListFragment extends AbstractFragment {
+public class UserListFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     public static final String ARG_GROUP_ID = "groupId";
@@ -61,7 +61,6 @@ public class UserListFragment extends AbstractFragment {
         FragmentUserListBinding binding = FragmentUserListBinding.inflate(inflater);
         controller = new UserListFragmentController(binding, this);
         binding.setController(controller);
-        setBinding(binding);
         return binding.getRoot();
     }
 
@@ -73,11 +72,5 @@ public class UserListFragment extends AbstractFragment {
     public void onDestroy() {
         controller.onDestroy();
         super.onDestroy();
-    }
-
-    @Override
-    public void onNavigateTo() {
-        controller.onNavigateTo();
-        super.onNavigateTo();
     }
 }
