@@ -39,7 +39,6 @@ public class EditGroupFragmentController {
     public void btnSaveClicked(View v) {
         if (!TextUtils.isEmpty(binding.groupNameInput.getText())) {
 
-
             String groupName = binding.groupNameInput.getText().toString();
             int groupId = fragment.getGroupId();
             //因为groupId默认值是0，所以如果groupId为0时将应该添加新组，否则是修改该组

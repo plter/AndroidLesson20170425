@@ -20,6 +20,11 @@ public abstract class AbstractFragment extends Fragment {
         return binding;
     }
 
+    /**
+     * 所有的Fragment都使用数据绑定功能，通过Fragment可以获取到该绑定对象
+     *
+     * @param binding
+     */
     public void setBinding(ViewDataBinding binding) {
         this.binding = binding;
     }
@@ -30,6 +35,15 @@ public abstract class AbstractFragment extends Fragment {
     public void onBackToFragment() {
         if (getBinding() != null) {
             getBinding().getRoot().setVisibility(View.VISIBLE);
+        }
+    }
+
+    /**
+     * 隐藏该界面，防止误操作
+     */
+    public void hide() {
+        if (getBinding() != null) {
+            getBinding().getRoot().setVisibility(View.GONE);
         }
     }
 }

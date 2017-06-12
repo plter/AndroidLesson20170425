@@ -71,6 +71,16 @@ public class DbConnector extends SQLiteOpenHelper {
         return (DbCursor) readableDatabase.query("user", null, null, null, null, null, null);
     }
 
+    /**
+     * 根据组id查找用户
+     *
+     * @param groupId
+     * @return
+     */
+    public DbCursor queryUsers(int groupId) {
+        return (DbCursor) readableDatabase.query("user", null, COLUMN_NAME_GROUP_ID + "=?", new String[]{String.valueOf(groupId)}, null, null, null);
+    }
+
     public DbCursor queryGroups() {
         return (DbCursor) readableDatabase.query(TABLE_NAME_GROUP, null, null, null, null, null, null);
     }

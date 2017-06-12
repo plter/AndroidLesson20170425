@@ -15,7 +15,8 @@ import top.yunp.addusers.db.DbConnector;
 import top.yunp.addusers.db.DbCursor;
 import top.yunp.addusers.fragments.EditGroupFragment;
 import top.yunp.addusers.fragments.UserGroupListFragment;
-import top.yunp.addusers.models.GroupListOperationsMenuItem;
+import top.yunp.addusers.fragments.UserListFragment;
+import top.yunp.addusers.models.OperationsMenuItem;
 import top.yunp.addusers.models.UserGroup;
 
 /**
@@ -73,6 +74,25 @@ public class UserGroupListFragmentController {
 
     private void addListeners() {
         addListItemLongClickListener();
+        addListItemClickListener();
+    }
+
+    private void addListItemClickListener() {
+
+        binding.groupListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                UserGroup userGroup = (UserGroup) parent.getAdapter().getItem(position);
+
+                fragment.hide();
+                fragment.getFragmentManager()
+                        .beginTransaction()
+                        .add(R.id.fragmentContainer, UserListFragment.newInstance(userGroup.getId()))
+                        .addToBackStack(UserListFragment.NAME)
+                        .commit();
+            }
+        });
+
     }
 
     private void addListItemLongClickListener() {
@@ -83,9 +103,9 @@ public class UserGroupListFragmentController {
                 final UserGroup group = (UserGroup) binding.groupListView.getAdapter().getItem(position);
                 final int groupId = group.getId();
 
-                final ArrayAdapter<GroupListOperationsMenuItem> adapter = new ArrayAdapter<GroupListOperationsMenuItem>(fragment.getContext(), android.R.layout.simple_list_item_1, new GroupListOperationsMenuItem[]{
-                        new GroupListOperationsMenuItem(GroupListOperationsMenuItem.OPERATION_EDIT, "编辑"),
-                        new GroupListOperationsMenuItem(GroupListOperationsMenuItem.OPERATION_DELETE, "删除")
+                final ArrayAdapter<OperationsMenuItem> adapter = new ArrayAdapter<OperationsMenuItem>(fragment.getContext(), android.R.layout.simple_list_item_1, new OperationsMenuItem[]{
+                        new OperationsMenuItem(OperationsMenuItem.OPERATION_EDIT, "编辑"),
+                        new OperationsMenuItem(OperationsMenuItem.OPERATION_DELETE, "删除")
                 });
 
                 new AlertDialog.Builder(fragment.getContext())
@@ -94,14 +114,14 @@ public class UserGroupListFragmentController {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 switch (adapter.getItem(which).getOperation()) {
-                                    case GroupListOperationsMenuItem.OPERATION_EDIT:
+                                    case OperationsMenuItem.OPERATION_EDIT:
                                         fragment.getFragmentManager()
                                                 .beginTransaction()
                                                 .add(R.id.fragmentContainer, EditGroupFragment.newInstance(group.getId(), group.getName()))
                                                 .addToBackStack(EditGroupFragment.NAME)
                                                 .commit();
                                         break;
-                                    case GroupListOperationsMenuItem.OPERATION_DELETE:
+                                    case OperationsMenuItem.OPERATION_DELETE:
                                         dbConnector.deleteGroup(groupId);
                                         readGroupsFromDb();
                                         break;

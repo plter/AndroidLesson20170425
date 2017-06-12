@@ -4,7 +4,7 @@ package top.yunp.addusers.models;
  * Created by plter on 6/8/17.
  */
 
-public class GroupListOperationsMenuItem {
+public class OperationsMenuItem {
 
     public static final int OPERATION_DELETE = 1;
     public static final int OPERATION_EDIT = 2;
@@ -12,7 +12,7 @@ public class GroupListOperationsMenuItem {
     private int operation;
     private String name;
 
-    public GroupListOperationsMenuItem(int operation, String name) {
+    public OperationsMenuItem(int operation, String name) {
         this.operation = operation;
         this.name = name;
     }

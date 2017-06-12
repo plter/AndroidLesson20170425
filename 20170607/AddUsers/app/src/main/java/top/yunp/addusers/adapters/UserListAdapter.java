@@ -6,8 +6,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import top.yunp.addusers.R;
 import top.yunp.addusers.db.DbCursor;
+import top.yunp.addusers.models.User;
 
 /**
  * Created by plter on 6/6/17.
@@ -16,7 +20,7 @@ import top.yunp.addusers.db.DbCursor;
 public class UserListAdapter extends BaseAdapter {
 
     private final Context context;
-    private DbCursor cursor;
+    private List<User> users = new ArrayList<>();
 
     public UserListAdapter(DbCursor cursor, Context context) {
         setCursor(cursor);
@@ -25,13 +29,16 @@ public class UserListAdapter extends BaseAdapter {
     }
 
     public void setCursor(DbCursor cursor) {
-        if (this.cursor != null) {
-            this.cursor.close();
+
+        if (cursor != null) {
+            System.out.println(cursor.getCount() + "<<<<<<<");
+            while (cursor.moveToNext()) {
+                users.add(new User(cursor.getId(), cursor.getName(), cursor.getAge()));
+            }
+            cursor.close();
+
+            notifyDataSetChanged();
         }
-
-        this.cursor = cursor;
-
-        notifyDataSetChanged();
     }
 
     public Context getContext() {
@@ -40,13 +47,12 @@ public class UserListAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return cursor != null ? cursor.getCount() : 0;
+        return users.size();
     }
 
     @Override
-    public DbCursor getItem(int position) {
-        this.cursor.moveToPosition(position);
-        return this.cursor;
+    public User getItem(int position) {
+        return users.get(position);
     }
 
     @Override
@@ -61,7 +67,7 @@ public class UserListAdapter extends BaseAdapter {
             convertView.setTag(new UserListItem(convertView));
         }
 
-        DbCursor cursor = getItem(position);
+        User cursor = getItem(position);
         UserListItem itemView = (UserListItem) convertView.getTag();
         itemView.getTvName().setText(cursor.getName());
         itemView.getTvAge().setText(String.valueOf(cursor.getAge()));
