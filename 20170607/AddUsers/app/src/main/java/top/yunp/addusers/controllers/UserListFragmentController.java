@@ -109,6 +109,7 @@ public class UserListFragmentController {
     }
 
     public void btnAddUserClicked(View v) {
+        //呈现添加用户的界面
         fragment.getFragmentManager()
                 .beginTransaction()
                 .replace(R.id.fragmentContainer, EditUserFragment.newInstance(fragment.getGroupId(), 0, "", 1))
@@ -116,16 +117,14 @@ public class UserListFragmentController {
                 .commit();
     }
 
+    /**
+     * 从数据库中读取出该组中的用户信息并呈现在列表中
+     */
     private void readFromDb() {
         adapter.setCursor(dbConnector.queryUsers(fragment.getGroupId()));
     }
 
     public void onDestroy() {
         dbConnector.close();
-    }
-
-
-    public void onNavigateTo() {
-        readFromDb();
     }
 }

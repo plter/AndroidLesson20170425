@@ -33,6 +33,7 @@ public class EditUserFragmentController {
         String name = null;
         int age = 0;
 
+        //如果输入用户名为空，则退出
         if (!TextUtils.isEmpty(binding.nameInput.getText())) {
             name = binding.nameInput.getText().toString();
         } else {
@@ -40,6 +41,7 @@ public class EditUserFragmentController {
             return;
         }
 
+        //如果输入的年龄为空，则退出
         if (!TextUtils.isEmpty(binding.ageInput.getText())) {
             age = Integer.parseInt(binding.ageInput.getText().toString());
         } else {
@@ -61,6 +63,9 @@ public class EditUserFragmentController {
         finish();
     }
 
+    /**
+     * 关闭该Fragment
+     */
     private void finish() {
         fragment.getFragmentManager().popBackStack();
     }

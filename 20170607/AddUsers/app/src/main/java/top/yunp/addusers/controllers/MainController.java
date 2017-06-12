@@ -23,6 +23,7 @@ public class MainController {
         this.mainActivity = mainActivity;
         this.supportFragmentManager = mainActivity.getSupportFragmentManager();
 
+        //呈现第一个界面，用户组列表
         fragment = new UserGroupListFragment();
         mainActivity.getSupportFragmentManager()
                 .beginTransaction()

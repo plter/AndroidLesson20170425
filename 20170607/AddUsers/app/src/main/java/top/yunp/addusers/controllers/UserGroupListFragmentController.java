@@ -33,6 +33,7 @@ public class UserGroupListFragmentController {
         this.binding = binding;
         this.fragment = userGroupFragment;
 
+        //创建数据库连接
         dbConnector = new DbConnector(fragment.getContext());
 
         addListeners();
@@ -40,6 +41,8 @@ public class UserGroupListFragmentController {
     }
 
     public void btnAddGroupClicked(View v) {
+
+        //呈现添加用户组的界面
         fragment.getFragmentManager()
                 .beginTransaction()
                 .replace(R.id.fragmentContainer, EditGroupFragment.newInstance())
@@ -51,6 +54,9 @@ public class UserGroupListFragmentController {
         dbConnector.close();
     }
 
+    /**
+     * 从数据库中读取所有组，并呈现在列表中
+     */
     private void readGroupsFromDb() {
         DbCursor cursor = dbConnector.queryGroups();
 
@@ -65,10 +71,6 @@ public class UserGroupListFragmentController {
         binding.groupListView.setAdapter(new ArrayAdapter<UserGroup>(fragment.getContext(), android.R.layout.simple_list_item_1, items));
     }
 
-    public void onNavigateTo() {
-        readGroupsFromDb();
-    }
-
 
     private void addListeners() {
         addListItemLongClickListener();
@@ -77,6 +79,7 @@ public class UserGroupListFragmentController {
 
     private void addListItemClickListener() {
 
+        //当列表项被点击时，呈现该组中的用户列表界面
         binding.groupListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -93,6 +96,8 @@ public class UserGroupListFragmentController {
     }
 
     private void addListItemLongClickListener() {
+
+        //长按呈现选项菜单
         binding.groupListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
@@ -100,6 +105,7 @@ public class UserGroupListFragmentController {
                 final UserGroup group = (UserGroup) binding.groupListView.getAdapter().getItem(position);
                 final int groupId = group.getId();
 
+                //菜单选项列表，其中包括编辑和删除
                 final ArrayAdapter<OperationsMenuItem> adapter = new ArrayAdapter<OperationsMenuItem>(fragment.getContext(), android.R.layout.simple_list_item_1, new OperationsMenuItem[]{
                         new OperationsMenuItem(OperationsMenuItem.OPERATION_EDIT, "编辑"),
                         new OperationsMenuItem(OperationsMenuItem.OPERATION_DELETE, "删除")
@@ -112,13 +118,15 @@ public class UserGroupListFragmentController {
                             public void onClick(DialogInterface dialog, int which) {
                                 switch (adapter.getItem(which).getOperation()) {
                                     case OperationsMenuItem.OPERATION_EDIT:
+                                        //呈现编辑该组的界面
                                         fragment.getFragmentManager()
                                                 .beginTransaction()
-                                                .add(R.id.fragmentContainer, EditGroupFragment.newInstance(group.getId(), group.getName()))
+                                                .replace(R.id.fragmentContainer, EditGroupFragment.newInstance(group.getId(), group.getName()))
                                                 .addToBackStack(EditGroupFragment.NAME)
                                                 .commit();
                                         break;
                                     case OperationsMenuItem.OPERATION_DELETE:
+                                        //根据id删除该该组
                                         dbConnector.deleteGroup(groupId);
                                         readGroupsFromDb();
                                         break;
