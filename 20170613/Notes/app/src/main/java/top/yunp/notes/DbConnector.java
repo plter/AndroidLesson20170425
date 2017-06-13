@@ -62,6 +62,10 @@ public class DbConnector extends SQLiteOpenHelper {
         writableDatabase.update(TABLE_NAME, values, ID_COLUMN_NAME + "=?", new String[]{String.valueOf(id)});
     }
 
+    public void deleteNode(int id) {
+        writableDatabase.delete(TABLE_NAME, ID_COLUMN_NAME + "=?", new String[]{String.valueOf(id)});
+    }
+
     public void close() {
         writableDatabase.close();
     }

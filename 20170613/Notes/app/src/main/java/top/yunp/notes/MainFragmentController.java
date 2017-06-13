@@ -1,5 +1,7 @@
 package top.yunp.notes;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -23,7 +25,7 @@ public class MainFragmentController {
         this.fragment = fragment;
 
         dbConnector = new DbConnector(fragment.getActivity());
-        readNotes();
+        readAndShowNotes();
 
         addListeners();
     }
@@ -34,16 +36,45 @@ public class MainFragmentController {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Note note = (Note) parent.getAdapter().getItem(position);
 
-                fragment.getFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.rootContainer, EditNoteFragment.newInstance(note.getId(), note.getTitle(), note.getContent()))
-                        .addToBackStack(EditNoteFragment.NAME)
-                        .commit();
+                showEditNoteFragment(note);
+            }
+        });
+
+        binding.notesListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                final Note note = (Note) parent.getAdapter().getItem(position);
+
+                new AlertDialog.Builder(fragment.getActivity())
+                        .setAdapter(new ArrayAdapter<String>(fragment.getActivity(), android.R.layout.simple_list_item_1, new String[]{"编辑", "删除"}), new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                switch (which) {
+                                    case 0:
+                                        showEditNoteFragment(note);
+                                        break;
+                                    case 1:
+                                        dbConnector.deleteNode(note.getId());
+                                        readAndShowNotes();
+                                        break;
+                                }
+                            }
+                        })
+                        .show();
+                return true;
             }
         });
     }
 
-    private void readNotes() {
+    private void showEditNoteFragment(Note note) {
+        fragment.getFragmentManager()
+                .beginTransaction()
+                .replace(R.id.rootContainer, EditNoteFragment.newInstance(note.getId(), note.getTitle(), note.getContent()))
+                .addToBackStack(EditNoteFragment.NAME)
+                .commit();
+    }
+
+    private void readAndShowNotes() {
         NotesCursor cursor = dbConnector.queryNotes();
         List<Note> notes = new ArrayList<>();
         while (cursor.moveToNext()) {
