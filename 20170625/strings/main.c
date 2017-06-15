@@ -40,10 +40,12 @@ int main() {
 
     char *cp = str;
     char c;
+
+    //只要该问的字符值不为0，则说明该字符串没有结束
     while ((c = *cp) > 0) {
         printf("%c\n", c);
 
-        cp++;
+        cp++;//将指针指向的地址往后偏移
     }
 
     return 0;
