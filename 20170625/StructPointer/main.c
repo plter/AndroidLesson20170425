@@ -12,10 +12,8 @@ int main() {
     s->age = 10;
     s->name = "XiaoMing";
 
-    Student *s1 = s;
-    s1->age = 20;
+    printf("s(name=%s,age=%d)\n", s->name, s->age);
 
-    printf("s(name=%s,age=%d)", s->name, s->age);
-
+    free(s);
     return 0;
 }
