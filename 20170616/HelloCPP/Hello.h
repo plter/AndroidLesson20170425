@@ -8,18 +8,23 @@
 
 #include <string>
 
-class Hello {
+namespace lib {
 
-private:
-    std::string name;
+    class Hello {
 
-public:
-    Hello(const std::string &name);
+    private:
+        std::string name;
 
-    void sayHello();
+    public:
+        Hello(const std::string &name);
 
-    void sayHi();
-};
+        virtual ~Hello();
+
+        void sayHello();
+
+        void sayHi();
+    };
+}
 
 
 #endif //HELLOCPP_HELLO_H

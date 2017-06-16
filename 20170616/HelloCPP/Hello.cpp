@@ -5,13 +5,20 @@
 #include "Hello.h"
 #include <stdio.h>
 
-void Hello::sayHello() {
-    printf("Hello %s\n", name.c_str());
-}
+namespace lib {
 
-void Hello::sayHi() {
-    printf("Hi\n");
-}
+    void Hello::sayHello() {
+        printf("Hello %s\n", name.c_str());
+    }
 
-Hello::Hello(const std::string &name) : name(name) {}
+    void Hello::sayHi() {
+        printf("Hi\n");
+    }
+
+    Hello::Hello(const std::string &name) : name(name) {}
+
+    Hello::~Hello() {
+        printf("Hello is deleted\n");
+    }
+}
 
