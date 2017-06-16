@@ -7,8 +7,9 @@
 
 
 #include <string>
+#include "IStudent.h"
 
-class Student {
+class Student : public IStudent {
 
 private:
     int age;
@@ -31,6 +32,8 @@ public:
     const std::string &getGender() const;
 
     void setGender(const std::string &gender);
+
+    void learn() override;
 };
 
 

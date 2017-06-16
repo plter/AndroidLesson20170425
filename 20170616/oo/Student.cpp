@@ -37,3 +37,7 @@ const std::string &Student::getGender() const {
 void Student::setGender(const std::string &gender) {
     Student::gender = gender;
 }
+
+void Student::learn() {
+    std::cout << name << " learn" << std::endl;
+}

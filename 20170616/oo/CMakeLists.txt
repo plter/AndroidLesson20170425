@@ -3,5 +3,5 @@ project(oo)
 
 set(CMAKE_CXX_STANDARD 11)
 
-set(SOURCE_FILES main.cpp Student.cpp Student.h Boy.cpp Boy.h)
+set(SOURCE_FILES main.cpp Student.cpp Student.h Boy.cpp Boy.h IStudent.h)
 add_executable(oo ${SOURCE_FILES})

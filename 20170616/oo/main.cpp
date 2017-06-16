@@ -27,5 +27,7 @@ int main() {
 
     b->Student::sayHello();
 
+    b->learn();
+
     return 0;
 }
