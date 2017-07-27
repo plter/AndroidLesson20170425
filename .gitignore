@@ -4,6 +4,8 @@
 build
 <<<<<<< HEAD
 out
+.DS_Store
+
 =======
 CMakeFiles
 cmake_install.cmake
